@@ -5,25 +5,16 @@
 #include	"Enemy.h"
 #include	"EffectManager.h"
 #include	"Item.h"
+#include    "PlayerDefine.h"
+#include    "Character.h"
 
-class CPlayer {
+class CPlayer : public CCharacter {
 private:
-	CTexture				m_Texture;
 	CSpriteMotionController	m_Motion;
-	float					m_PosX;
-	float					m_PosY;
 	bool					m_bMove;
-	float					m_MoveX;
-	float					m_MoveY;
 	bool					m_bJump;
 	bool					m_bReverse;
 	CRectangle				m_SrcRect;
-	
-	int						m_HP;
-	int						m_DamageWait;
-	
-	CTexture				m_FrameTexture;
-	CTexture				m_HPTexture;
 	
 	CEffectManager*			m_pEffectManager;
 	
@@ -46,33 +37,52 @@ private:
 public:
 	CPlayer();
 	~CPlayer();
-	bool Load(void);
-	void Initialize(void);
-	void Update(void);
-	void UpdateKey(void);
-	void UpdateMove(void);
+    bool Load(void);
+	virtual void Initialize(void) override;
+	virtual void Update(void) override;
+	virtual void UpdateKey(void) override;
+	virtual void UpdateMove(void) override;
 	void CollisionStage(float ox,float oy);
 	bool CollisionEnemy(CEnemy& ene);
 	bool CollisionItem(CItem& itm);
-	void Render(float wx,float wy);
-	void RenderStatus(void);
+	virtual void Render(float wx,float wy);
 	void RenderDebug(float wx,float wy);
 	void Release(void);
 	bool IsAttack(){ return m_Motion.GetMotionNo() == MOTION_ATTACK; }
-	CRectangle GetRect(){
+	virtual CRectangle GetRect(void) override {
 		if(IsAttack())
 		{
-			return CRectangle(m_PosX + PLAYER_RECTDECREASE,m_PosY + PLAYER_RECTDECREASE,m_PosX + m_SrcRect.GetWidth() - PLAYER_RECTDECREASE - PLAYER_ATTACKWIDTH,m_PosY + m_SrcRect.GetHeight());
+			return CRectangle(
+                m_Pos.x + PLAYER_RECTDECREASE,
+                m_Pos.y + PLAYER_RECTDECREASE,
+                m_Pos.x + m_SrcRect.GetWidth() - PLAYER_RECTDECREASE - PLAYER_ATTACKWIDTH,
+                m_Pos.y + m_SrcRect.GetHeight()
+            );
 		}
-		return CRectangle(m_PosX + PLAYER_RECTDECREASE,m_PosY + PLAYER_RECTDECREASE,m_PosX + m_SrcRect.GetWidth() - PLAYER_RECTDECREASE,m_PosY + m_SrcRect.GetHeight());
+		return CRectangle(
+            m_Pos.x + PLAYER_RECTDECREASE,
+            m_Pos.y + PLAYER_RECTDECREASE,
+            m_Pos.x + m_SrcRect.GetWidth() - PLAYER_RECTDECREASE,
+            m_Pos.y + m_SrcRect.GetHeight()
+        );
 	}
-	CRectangle GetAttackRect(){
+	CRectangle GetAttackRect(void) {
 		//”½“]’†
 		if(m_bReverse)
 		{
-			return CRectangle(m_PosX - PLAYER_ATTACKWIDTH,m_PosY,m_PosX + PLAYER_RECTDECREASE,m_PosY + m_SrcRect.GetHeight());
+			return CRectangle(
+                m_Pos.x - PLAYER_ATTACKWIDTH,
+                m_Pos.y,
+                m_Pos.x + PLAYER_RECTDECREASE,
+                m_Pos.y + m_SrcRect.GetHeight()
+            );
 		}
-		return CRectangle(m_PosX + m_SrcRect.GetWidth() - PLAYER_RECTDECREASE - PLAYER_ATTACKWIDTH,m_PosY,m_PosX + m_SrcRect.GetWidth(),m_PosY + m_SrcRect.GetHeight());
+		return CRectangle(
+            m_Pos.x + m_SrcRect.GetWidth() - PLAYER_RECTDECREASE - PLAYER_ATTACKWIDTH,
+            m_Pos.y,
+            m_Pos.x + m_SrcRect.GetWidth(),
+            m_Pos.y + m_SrcRect.GetHeight()
+        );
 	}
 	void SetEffectManager(CEffectManager* pmng){ m_pEffectManager = pmng; }
 	bool IsEnd(void){ return m_bEnd; }

@@ -15,6 +15,7 @@
 #include	"Game.h"
 #include	"GameClear.h"
 #include	"GameOver.h"
+#include    "TextureManager.h"
 
 //現在のシーン
 int						gScene = SCENENO_TITLE;
@@ -40,6 +41,20 @@ bool					g_bDebug = false;
 MofBool CGameApp::Initialize(void){
 	//リソース配置ディレクトリの設定
 	CUtilities::SetCurrentDirectory("Resource");
+    std::string textureKey[] = {
+        "player",
+        "HP",
+        "Frame",
+    };
+    std::string textureFile[] = {
+        "player.png",
+        "HP.png",
+        "Frame.png",
+    };
+    const int s = 3;
+    for (int i = 0; i < s; i++) {
+        g_TextureManager.Register(textureKey[i], textureFile[i]);
+    }
 	//シーンの必要リソースを全て読み込む
 	gTitleScene.Load();
 	gGameScene.Load();
@@ -171,6 +186,7 @@ MofBool CGameApp::Release(void){
 	gTitleScene.Release();
 	gGameScene.Release();
 	gGameClearScene.Release();
-	gGameOverScene.Release();
+    gGameOverScene.Release();
+    g_TextureManager.Release();
 	return TRUE;
 }

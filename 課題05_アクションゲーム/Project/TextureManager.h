@@ -3,6 +3,8 @@
 #include <memory>
 #include <unordered_map>
 
+using CTexturePtr = std::shared_ptr<CTexture>;
+
 /// <summary>
 /// ‰æ‘œŠÇ—ƒNƒ‰ƒX
 /// </summary>
@@ -11,7 +13,7 @@ class CTextureManager
 private:
 
 	//! ŠÇ—‚â‚Â
-	std::unordered_map <std::string, std::shared_ptr<CTexture>> m_Manager;
+	std::unordered_map <std::string, CTexturePtr> m_Manager;
 
 	/// <summary>
 	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
@@ -36,7 +38,7 @@ public:
 	/// </summary>
 	/// <param name="key">“o˜^ƒL[</param>
 	/// <returns>‰æ‘œ</returns>
-	std::shared_ptr<CTexture>& Get(const std::string& key);
+    CTexturePtr& Get(const std::string& key);
 
 	/// <summary>
 	/// ‰æ‘œ‚Ì“o˜^
@@ -45,11 +47,12 @@ public:
 	/// <param name="file">“o˜^‚·‚é‰æ‘œƒtƒ@ƒCƒ‹ƒpƒX</param>
 	/// <returns>true : ¬Œ÷, false : ¸”s</returns>
 	bool Register(const std::string& key, const std::string& file);
+
 	/// <summary>
-	/// 
+	/// ‰æ‘œ‚Ì‰ğ•ú
 	/// </summary>
-	/// <param name="key"></param>
-	/// <returns></returns>
+	/// <param name="key">“o˜^ƒL[</param>
+	/// <returns>true : ¬Œ÷, false : ¸”s</returns>
 	bool Release(const std::string& key = "");
 };
 

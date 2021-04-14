@@ -6,20 +6,12 @@
  *
  */
 CPlayer::CPlayer() :
-	m_Texture(),
+    CCharacter(),
 	m_Motion(),
-	m_PosX(0.0f),
-	m_PosY(0.0f),
 	m_bMove(false),
-	m_MoveX(0.0f),
-	m_MoveY(0.0f),
 	m_bJump(false),
 	m_bReverse(false),
 	m_SrcRect(),
-	m_HP(100),
-	m_DamageWait(0),
-	m_FrameTexture(),
-	m_HPTexture(),
 	m_bEnd(false),
 	m_pEndEffect(NULL),
 	m_bGoal(false) {
@@ -37,19 +29,6 @@ CPlayer::~CPlayer() {
  * 利用するテクスチャを読み込む。
  */
 bool CPlayer::Load(void) {
-	//テクスチャの読み込み
-	if (!m_Texture.Load("player.png"))
-	{
-		return false;
-	}
-	if (!m_FrameTexture.Load("Frame.png"))
-	{
-		return false;
-	}
-	if (!m_HPTexture.Load("HP.png"))
-	{
-		return false;
-	}
 	//アニメーションを作成
 	SpriteAnimationCreate anim[] = {
 		//待機
@@ -104,18 +83,18 @@ bool CPlayer::Load(void) {
  * プレイヤーの位置など状態を初期化したいときに実行する。
  */
 void CPlayer::Initialize(void) {
-	m_PosX = 200;
-	m_PosY = 0;
-	m_bMove = false;
-	m_MoveX = 0.0f;
-	m_MoveY = 0.0f;
-	m_bReverse = false;
-	m_bJump = false;
-	m_HP = 100;
+	m_Pos.x      = 200;
+	m_Pos.y      = 0;
+	m_bMove      = false;
+	m_Move.x     = 0.0f;
+	m_Move.y     = 0.0f;
+	m_bReverse   = false;
+	m_bJump      = false;
+	m_HP         = 100;
 	m_DamageWait = 0;
-	m_bEnd = false;
+	m_bEnd       = false;
 	m_pEndEffect = NULL;
-	m_bGoal = false;
+	m_bGoal      = false;
 	m_Motion.ChangeMotion(MOTION_WAIT);
 }
 
@@ -159,15 +138,20 @@ void CPlayer::Update(void) {
 	}
 	//移動更新
 	UpdateMove();
+
 	//実際に座標を移動させる
-	m_PosX += m_MoveX;
-	m_PosY += m_MoveY;
+    CCharacter::Update();
+
 	//画面外で落下としてHPを０にする
-	if (m_PosY >= g_pGraphics->GetTargetHeight() && m_HP > 0)
+	if (m_Pos.y >= g_pGraphics->GetTargetHeight() && m_HP > 0)
 	{
 		m_HP = 0;
 		//爆発エフェクトを発生させる
-		m_pEndEffect = m_pEffectManager->Start(m_PosX + m_SrcRect.GetWidth() * 0.5f, m_PosY + m_SrcRect.GetHeight() * 0.5f, EFC_EXPLOSION02);
+		m_pEndEffect = m_pEffectManager->Start(
+            m_Pos.x + m_SrcRect.GetWidth() * 0.5f,
+            m_Pos.y + m_SrcRect.GetHeight() * 0.5f,
+            EFC_EXPLOSION02
+        );
 	}
 	//アニメーションの更新
 	m_Motion.AddTimer(CUtilities::GetFrameSecond());
@@ -189,12 +173,12 @@ void CPlayer::UpdateKey(void) {
 	//攻撃中は移動できないようにする
 	if (g_pInput->IsKeyHold(MOFKEY_LEFT))
 	{
-		m_MoveX -= PLAYER_SPEED;
+		m_Move.x -= PLAYER_SPEED;
 		m_bReverse = true;
 		m_bMove = true;
-		if (m_MoveX < -PLAYER_MAXSPEED)
+		if (m_Move.x < -PLAYER_MAXSPEED)
 		{
-			m_MoveX = -PLAYER_MAXSPEED;
+			m_Move.x = -PLAYER_MAXSPEED;
 		}
 		if (m_Motion.GetMotionNo() == MOTION_WAIT)
 		{
@@ -203,12 +187,12 @@ void CPlayer::UpdateKey(void) {
 	}
 	else if (g_pInput->IsKeyHold(MOFKEY_RIGHT))
 	{
-		m_MoveX += PLAYER_SPEED;
+		m_Move.x += PLAYER_SPEED;
 		m_bReverse = false;
 		m_bMove = true;
-		if (m_MoveX > PLAYER_MAXSPEED)
+		if (m_Move.x > PLAYER_MAXSPEED)
 		{
-			m_MoveX = PLAYER_MAXSPEED;
+			m_Move.x = PLAYER_MAXSPEED;
 		}
 		if (m_Motion.GetMotionNo() == MOTION_WAIT)
 		{
@@ -219,7 +203,7 @@ void CPlayer::UpdateKey(void) {
 	if (g_pInput->IsKeyHold(MOFKEY_UP) && !m_bJump)
 	{
 		m_bJump = true;
-		m_MoveY = PLAYER_JUMP;
+		m_Move.y = PLAYER_JUMP;
 		m_Motion.ChangeMotion(MOTION_JUMPSTART);
 	}
 	//SPACEキーで攻撃
@@ -237,20 +221,20 @@ void CPlayer::UpdateMove(void) {
 	//このフレームでの移動入力がなければ減速処理を実行する
 	if (!m_bMove)
 	{
-		if (m_MoveX > 0)
+		if (m_Move.x > 0)
 		{
-			m_MoveX -= PLAYER_SPEED;
-			if (m_MoveX <= 0)
+			m_Move.x -= PLAYER_SPEED;
+			if (m_Move.x <= 0)
 			{
-				m_MoveX = 0;
+				m_Move.x = 0;
 			}
 		}
-		else if (m_MoveX < 0)
+		else if (m_Move.x < 0)
 		{
-			m_MoveX += PLAYER_SPEED;
-			if (m_MoveX >= 0)
+			m_Move.x += PLAYER_SPEED;
+			if (m_Move.x >= 0)
 			{
-				m_MoveX = 0;
+				m_Move.x = 0;
 			}
 		}
 		else if (m_Motion.GetMotionNo() == MOTION_MOVE)
@@ -259,10 +243,10 @@ void CPlayer::UpdateMove(void) {
 		}
 	}
 	//重力により下に少しずつ下がる
-	m_MoveY += GRAVITY;
-	if (m_MoveY >= 20.0f)
+	m_Move.y += GRAVITY;
+	if (m_Move.y >= 20.0f)
 	{
-		m_MoveY = 20.0f;
+		m_Move.y = 20.0f;
 	}
 }
 
@@ -274,30 +258,30 @@ void CPlayer::UpdateMove(void) {
  * [in]			oy					Y埋まり量
  */
 void CPlayer::CollisionStage(float ox, float oy) {
-	m_PosX += ox;
-	m_PosY += oy;
+	m_Pos.x += ox;
+	m_Pos.y += oy;
 	//落下中の下埋まり、ジャンプ中の上埋まりの場合は移動を初期化する。
-	if (oy < 0 && m_MoveY > 0)
+	if (oy < 0 && m_Move.y > 0)
 	{
-		m_MoveY = 0;
+		m_Move.y = 0;
 		if (m_bJump)
 		{
 			m_bJump = false;
 			m_Motion.ChangeMotion(MOTION_JUMPEND);
 		}
 	}
-	else if (oy > 0 && m_MoveY < 0)
+	else if (oy > 0 && m_Move.y < 0)
 	{
-		m_MoveY = 0;
+		m_Move.y = 0;
 	}
 	//左移動中の左埋まり、右移動中の右埋まりの場合は移動を初期化する。
-	if (ox < 0 && m_MoveX > 0)
+	if (ox < 0 && m_Move.x > 0)
 	{
-		m_MoveX = 0;
+		m_Move.x = 0;
 	}
-	else if (ox > 0 && m_MoveX < 0)
+	else if (ox > 0 && m_Move.x < 0)
 	{
-		m_MoveX = 0;
+		m_Move.x = 0;
 	}
 }
 
@@ -336,24 +320,32 @@ bool CPlayer::CollisionEnemy(CEnemy& ene) {
 		m_DamageWait = 60;
 		if (prec.Left < erec.Left)
 		{
-			m_MoveX = -5.0f;
+			m_Move.x = -5.0f;
 			m_bReverse = false;
 		}
 		else
 		{
-			m_MoveX = 5.0f;
+			m_Move.x = 5.0f;
 			m_bReverse = true;
 		}
 		m_Motion.ChangeMotion(MOTION_DAMAGE);
 		if (m_HP <= 0)
 		{
 			//爆発エフェクトを発生させる
-			m_pEndEffect = m_pEffectManager->Start(m_PosX + m_SrcRect.GetWidth() * 0.5f, m_PosY + m_SrcRect.GetHeight() * 0.5f, EFC_EXPLOSION02);
+			m_pEndEffect = m_pEffectManager->Start(
+                m_Pos.x + m_SrcRect.GetWidth() * 0.5f,
+                m_Pos.y + m_SrcRect.GetHeight() * 0.5f,
+                EFC_EXPLOSION02
+            );
 		}
 		else
 		{
 			//ダメージエフェクトを発生させる
-			m_pEffectManager->Start(m_PosX + m_SrcRect.GetWidth() * 0.5f, m_PosY + m_SrcRect.GetHeight() * 0.5f, EFC_DAMAGE);
+			m_pEffectManager->Start(
+                m_Pos.x + m_SrcRect.GetWidth() * 0.5f,
+                m_Pos.y + m_SrcRect.GetHeight() * 0.5f,
+                EFC_DAMAGE
+            );
 		}
 		return true;
 	}
@@ -433,8 +425,8 @@ void CPlayer::Render(float wx, float wy) {
 	//描画矩形
 	CRectangle dr = m_SrcRect;
 	//描画位置
-	float px = m_PosX - wx;
-	float py = m_PosY - wy;
+	float px = m_Pos.x - wx;
+	float py = m_Pos.y - wy;
 	//反転フラグがONの場合描画矩形を反転させる
 	if (m_bReverse)
 	{
@@ -447,19 +439,7 @@ void CPlayer::Render(float wx, float wy) {
 		}
 	}
 	//テクスチャの描画
-	m_Texture.Render(px, py, dr);
-}
-
-/**
- * ステータス描画
- *
- */
-void CPlayer::RenderStatus(void) {
-	//HPに応じて矩形の幅を変化させる
-	CRectangle rec(0, 0, 532 * (m_HP * 0.01f), 64);
-	m_HPTexture.Render(248, 20, rec);
-	//フレームを上部に描画
-	m_FrameTexture.Render(0, 0);
+	m_pTexture->Render(px, py, dr);
 }
 
 /**
@@ -471,7 +451,8 @@ void CPlayer::RenderStatus(void) {
  */
 void CPlayer::RenderDebug(float wx, float wy) {
 	//位置の描画
-	CGraphicsUtilities::RenderString(10, 70, "プレイヤー位置 X : %.0f , Y : %.0f プレイヤーHP : %d", m_PosX, m_PosY, m_HP);
+	CGraphicsUtilities::RenderString(10, 70, "プレイヤー位置 X : %.0f , Y : %.0f プレイヤーHP : %d",
+        m_Pos.x, m_Pos.y, m_HP);
 	//当たり判定の表示
 	CRectangle hr = GetRect();
 	CGraphicsUtilities::RenderRect(hr.Left - wx, hr.Top - wy, hr.Right - wx, hr.Bottom - wy, MOF_XRGB(0, 255, 0));
@@ -488,8 +469,5 @@ void CPlayer::RenderDebug(float wx, float wy) {
  *
  */
 void CPlayer::Release(void) {
-	m_Texture.Release();
 	m_Motion.Release();
-	m_FrameTexture.Release();
-	m_HPTexture.Release();
 }

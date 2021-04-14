@@ -5,6 +5,7 @@
 #include	"Enemy.h"
 #include	"Item.h"
 #include	"EffectManager.h"
+#include    "UIPlayerStatus.h"
 
 class CGame {
 private:
@@ -18,6 +19,7 @@ private:
 	CItem*		m_ItemArray;
 	//エフェクト
 	CEffectManager	m_EffectManager;
+    CUIPlayerStatus m_UIPlayerStatus;
 public:
 	CGame();
 	~CGame();

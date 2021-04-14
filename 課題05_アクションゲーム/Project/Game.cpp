@@ -1,5 +1,6 @@
 #include	"GameDefine.h"
 #include	"Game.h"
+#include    "TextureManager.h"
 
 //変更するシーン(外部参照、実体はGameApp.cpp)
 extern int						gChangeScene;
@@ -25,6 +26,9 @@ CGame::~CGame(){
 bool CGame::Load(void){
 	//プレイヤーの素材読み込み
 	m_Player.Load();
+    m_Player.SetTexture(g_TextureManager.Get("player"));
+    m_UIPlayerStatus.SetPlayer(&m_Player);
+    m_UIPlayerStatus.SetTexture(g_TextureManager.Get("Frame"), g_TextureManager.Get("HP"));
 	//ステージの素材読み込み
 	m_Stage.Load("Stage1.txt");
 	//敵メモリ確保
@@ -156,7 +160,7 @@ void CGame::Render(void){
 	m_EffectManager.Render(m_Stage.GetScrollX(),m_Stage.GetScrollY());
 
 	//プレイヤーの状態描画
-	m_Player.RenderStatus();
+	m_UIPlayerStatus.Render();
 
 	//CGraphicsUtilities::RenderString(10,10,"ゲーム画面");
 	//CGraphicsUtilities::RenderString(10,40,"F2キーでゲームクリア、F3キーでゲームオーバー");

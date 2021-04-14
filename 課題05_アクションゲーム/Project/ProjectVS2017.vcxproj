@@ -95,6 +95,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -107,9 +108,11 @@
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="UIPlayerStatus.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
@@ -117,6 +120,7 @@
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameDefine.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Player.h" />
@@ -124,6 +128,7 @@
     <ClInclude Include="Stage.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="UIPlayerStatus.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
