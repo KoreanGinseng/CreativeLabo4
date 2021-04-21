@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="追加ファイル">
+      <UniqueIdentifier>{ba8ab4fa-b19b-4f9f-99b6-99568c21b3f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="追加ファイル\Input">
+      <UniqueIdentifier>{acaed048-166f-45a3-8646-2a26f9159e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="追加ファイル\Common">
+      <UniqueIdentifier>{7eea1609-875a-428e-82f6-5379f2efc53a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="追加ファイル\Animation">
+      <UniqueIdentifier>{67a91930-0894-4537-8ad1-712feadc7914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="追加ファイル\External">
+      <UniqueIdentifier>{511893c4-73d6-465d-9966-0c5343fbb7b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="追加ファイル\External\nlohmann">
+      <UniqueIdentifier>{6d4a2274-7851-447a-a2e0-eb0a307c755e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="追加ファイル\Resource">
+      <UniqueIdentifier>{fb618894-d3c3-4412-91c4-580138320f9a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameApp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClear.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\WinApiInput.cpp">
+      <Filter>追加ファイル\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Input.cpp">
+      <Filter>追加ファイル\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\MofInput.cpp">
+      <Filter>追加ファイル\Input</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameApp.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDefine.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClear.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Common.h">
+      <Filter>追加ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\InputManager.h">
+      <Filter>追加ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Singleton.h">
+      <Filter>追加ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\WinApiInput.h">
+      <Filter>追加ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\IInput.h">
+      <Filter>追加ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Input.h">
+      <Filter>追加ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\MofInput.h">
+      <Filter>追加ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\LogInput.h">
+      <Filter>追加ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\ReplayInput.h">
+      <Filter>追加ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\OriginalRectangle2.h">
+      <Filter>追加ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Rectangle.h">
+      <Filter>追加ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\OriginalRectangle.h">
+      <Filter>追加ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\MofRectangle.h">
+      <Filter>追加ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\OriginalRectangle3.h">
+      <Filter>追加ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\MofAnimationState.h">
+      <Filter>追加ファイル\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\PlayerAnimationCreator.h">
+      <Filter>追加ファイル\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\AnimationState.h">
+      <Filter>追加ファイル\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\IAnimationCreator.h">
+      <Filter>追加ファイル\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\IAnimationState.h">
+      <Filter>追加ファイル\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\JsonAnimationCreator.h">
+      <Filter>追加ファイル\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="External\nlohmann\json.hpp">
+      <Filter>追加ファイル\External\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceManager.h">
+      <Filter>追加ファイル\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourcePack.h">
+      <Filter>追加ファイル\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Texture.h">
+      <Filter>追加ファイル\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceContainer.h">
+      <Filter>追加ファイル\Resource</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Version.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

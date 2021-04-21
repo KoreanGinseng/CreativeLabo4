@@ -1,0 +1,16 @@
+{
+  "Textures": [
+    {
+      "Key": "Player",
+      "File": "player.png"
+    },
+    {
+      "Key": "Frame",
+      "File": "Frame.png"
+    },
+    {
+      "Key": "HP",
+      "File": "HP.png"
+    }
+  ]
+}
