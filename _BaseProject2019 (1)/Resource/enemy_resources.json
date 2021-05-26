@@ -1,0 +1,8 @@
+{
+  "Textures": [
+    {
+      "Key": "Enemy",
+      "File": "enemy01.png"
+    }
+  ]
+}

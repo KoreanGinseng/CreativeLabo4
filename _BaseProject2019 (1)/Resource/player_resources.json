@@ -1,0 +1,8 @@
+{
+  "Textures": [
+    {
+      "Key": "Player",
+      "File": "player.png"
+    }
+  ]
+}
