@@ -37,6 +37,9 @@
     <Filter Include="Include\External\nlohmann">
       <UniqueIdentifier>{ac4bb305-6c52-46f9-8479-bb0b0c20898d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\Scene">
+      <UniqueIdentifier>{d8bcef28-d34e-403f-a775-190f37fff049}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -193,6 +196,15 @@
     </ClInclude>
     <ClInclude Include="..\Include\Animation\AniMakeAnimationCreator.h">
       <Filter>Include\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Scene\IScene.h">
+      <Filter>Include\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Scene\Scene.h">
+      <Filter>Include\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Scene\SceneManager.h">
+      <Filter>Include\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

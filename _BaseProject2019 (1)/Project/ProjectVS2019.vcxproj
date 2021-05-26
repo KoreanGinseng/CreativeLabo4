@@ -153,6 +153,9 @@
     <ClInclude Include="..\Include\Resource\ResourceManager.h" />
     <ClInclude Include="..\Include\Resource\ResourcePack.h" />
     <ClInclude Include="..\Include\Resource\Texture.h" />
+    <ClInclude Include="..\Include\Scene\IScene.h" />
+    <ClInclude Include="..\Include\Scene\Scene.h" />
+    <ClInclude Include="..\Include\Scene\SceneManager.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
