@@ -1,0 +1,209 @@
+{
+  "Animations": [
+    {
+      "Frames": [
+        {
+          "Wait": 5,
+          "No": 0,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 1,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 2,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 3,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 4,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 5,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 6,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 7,
+          "Step": 0
+        }
+      ],
+      "Height": 64,
+      "Loop": true,
+      "Name": "Wait",
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Width": 60
+    },
+
+    {
+      "Frames": [
+        {
+          "Wait": 5,
+          "No": 0,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 1,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 2,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 3,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 4,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 5,
+          "Step": 0
+        }
+      ],
+      "Height": 64,
+      "Loop": true,
+      "Name": "Move",
+      "OffsetX": 0,
+      "OffsetY": 70,
+      "Width": 60
+    },
+
+    {
+      "Frames": [
+        {
+          "Wait": 5,
+          "No": 0,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 1,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 2,
+          "Step": 0
+        },
+        {
+          "Wait": 5,
+          "No": 3,
+          "Step": 0
+        }
+      ],
+      "Height": 64,
+      "Loop": false,
+      "Name": "JumpStart",
+      "OffsetX": 0,
+      "OffsetY": 140,
+      "Width": 60
+    },
+
+    {
+      "Frames": [
+        {
+          "Wait": 2,
+          "No": 0,
+          "Step": 0
+        },
+        {
+          "Wait": 2,
+          "No": 1,
+          "Step": 0
+        }
+      ],
+      "Height": 64,
+      "Loop": false,
+      "Name": "JumpEnd",
+      "OffsetX": 240,
+      "OffsetY": 140,
+      "Width": 60
+    },
+
+    {
+      "Frames": [
+        {
+          "Wait": 2,
+          "No": 0,
+          "Step": 0
+        },
+        {
+          "Wait": 2,
+          "No": 1,
+          "Step": 0
+        },
+        {
+          "Wait": 2,
+          "No": 2,
+          "Step": 0
+        },
+        {
+          "Wait": 2,
+          "No": 3,
+          "Step": 0
+        },
+        {
+          "Wait": 2,
+          "No": 4,
+          "Step": 0
+        },
+        {
+          "Wait": 2,
+          "No": 5,
+          "Step": 0
+        },
+        {
+          "Wait": 2,
+          "No": 6,
+          "Step": 0
+        }
+      ],
+      "Height": 64,
+      "Loop": false,
+      "Name": "Attack",
+      "OffsetX": 0,
+      "OffsetY": 350,
+      "Width": 90
+    },
+
+    {
+      "Frames": [
+        {
+          "Wait": 20,
+          "No": 0,
+          "Step": 0
+        }
+      ],
+      "Height": 64,
+      "Loop": false,
+      "Name": "Damage",
+      "OffsetX": 480,
+      "OffsetY": 0,
+      "Width": 60
+    }
+  ]
+}
