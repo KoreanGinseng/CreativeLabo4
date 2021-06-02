@@ -206,6 +206,12 @@
     <ClInclude Include="..\Include\Scene\SceneManager.h">
       <Filter>Include\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Render\FillRectRenderCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Render\MofFillRectRenderCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Version.rc">

@@ -12,7 +12,7 @@ namespace sip {
 
     public:
 
-        Scene(IScene::InitData& init)
+        Scene(IScene::InitData init)
             : keyType_(init.keyType)
             , sceneData_(init.sceneData) {
         }
@@ -30,7 +30,7 @@ namespace sip {
         /**
         * @bref •`‰æˆ—
         */
-        virtual void Render() override {}
+        virtual void Render(RenderCommandTaskPtr& render_task) override {}
 
         /**
         * @bref ƒL[‚Ìæ“¾

@@ -109,6 +109,8 @@
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Include\Render\FillRectRenderCommand.h" />
+    <ClInclude Include="..\Include\Render\MofFillRectRenderCommand.h" />
     <ClInclude Include="..\Include\Render\MofRenderClearCommand.h" />
     <ClInclude Include="..\Include\Render\MofRenderEndCommand.h" />
     <ClInclude Include="..\Include\Render\MofRenderStartCommand.h" />

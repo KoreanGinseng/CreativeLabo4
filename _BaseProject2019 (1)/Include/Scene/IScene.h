@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Common/Common.h"
+#include "../Render/RenderManager.h"
 
 namespace sip {
 
@@ -34,7 +35,7 @@ namespace sip {
         /**
         * @bref •`‰æˆ—
         */
-        virtual void Render() = 0;
+        virtual void Render(RenderCommandTaskPtr& render_task) = 0;
 
         /**
         * @bref ƒL[‚Ìæ“¾

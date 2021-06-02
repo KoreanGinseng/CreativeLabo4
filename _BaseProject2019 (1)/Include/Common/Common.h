@@ -46,3 +46,6 @@ using anytype = void*;
 #ifdef 		__MOFLIB
 #include	<Mof.h>
 #endif		//__MOFLIB
+
+constexpr int window_width  = 1024;
+constexpr int window_height =  768;

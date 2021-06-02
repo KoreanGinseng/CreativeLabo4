@@ -35,4 +35,7 @@ namespace sip {
         return std::make_shared< MofStringRenderCommand >(x, y, temp);
     }
 }
+namespace detail {
+    using StringRenderCommand = sip::MofStringRenderCommand;
+}
 #endif // __MOFLIB

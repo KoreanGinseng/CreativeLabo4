@@ -24,10 +24,42 @@
 #include    "../Include/Render/RenderStartCommand.h"
 #include    "../Include/Render/RenderEndCommand.h"
 #include    "../Include/Render/TextureRenderCommand.h"
+#include    "../Include/Render/StringRenderCommand.h"
 
 //Animation
 #include    "../Include/Animation/AnimationState.h"
 #include    "../Include/Animation/AniMakeAnimationCreator.h"
+
+//Scene
+#include    "../Include/Scene/SceneManager.h"
+#include    "../Include/Scene/Scene.h"
+
+class GameScene : public sip::Scene {
+public:
+    explicit GameScene(sip::Scene::InitData init) 
+    : sip::Scene(init) {
+    }
+
+    /**
+    * @bref •`‰æˆ—
+    */
+    virtual void Render(sip::RenderCommandTaskPtr& render_task) override {
+        render_task->Push(std::make_shared<detail::StringRenderCommand>(0, 0, "game"), 0);
+    }
+};
+class TestScene : public sip::Scene {
+public:
+    explicit TestScene(sip::Scene::InitData init)
+        : sip::Scene(init) {
+    }
+
+    /**
+    * @bref •`‰æˆ—
+    */
+    virtual void Render(sip::RenderCommandTaskPtr& render_task) override {
+        render_task->Push(std::make_shared<detail::StringRenderCommand>(0, 0, "test"), 0);
+    }
+};
 
 sip::TexturePtr        g_Texture  = nullptr;
 sip::TexturePtr        g_Texture2 = nullptr;
@@ -45,6 +77,9 @@ float                  g_PosX     = 0.0f;
 MofBool CGameApp::Initialize(void) {
 
     CUtilities::SetCurrentDirectory("Resource");
+
+    sip::SceneManager<sip::SceneData>::GetInstance().AddScene<GameScene>("game");
+    sip::SceneManager<sip::SceneData>::GetInstance().AddScene<TestScene>("test");
 
     // Input
     auto input = InputManagerInstance.AddInput<sip::LogInput>()->CreateInput<sip::MofInput>();
@@ -79,6 +114,14 @@ MofBool CGameApp::Update(void) {
     //“ü—ÍXV
     InputManagerInstance.Update();
 
+    if (g_pInput->IsKeyPush(MOFKEY_F1)) {
+        sip::SceneManager<sip::SceneData>::GetInstance().ChangeScene("test", 3.0f);
+    }
+    if (g_pInput->IsKeyPush(MOFKEY_F2)) {
+        sip::SceneManager<sip::SceneData>::GetInstance().ChangeScene("game", 3.0f);
+    }
+    sip::SceneManager<sip::SceneData>::GetInstance().Update();
+
     g_anim->Update();
 
     if (float move = g_Input->GetAxis("Horizontal")) {
@@ -102,6 +145,8 @@ MofBool CGameApp::Render(void) {
     render_task->Push(sip::RenderClearCommand::Create(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f), 0);
     render_task->Push(sip::TextureRenderCommand::Create(g_PosX, 300, g_Texture), 1);
     render_task->Push(sip::TextureRenderCommand::Create(g_PosX, 100, g_anim->GetSrcRect(), g_Texture2), 1);
+
+    sip::SceneManager<sip::SceneData>::GetInstance().Render(render_task);
 
     sip::RenderManager::GetInstance().Push(render_task);
 
