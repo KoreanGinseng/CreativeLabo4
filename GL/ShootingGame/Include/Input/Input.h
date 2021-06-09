@@ -1,11 +1,11 @@
 #pragma once
 
-#include	"IInput.h"
+#include    "IInput.h"
 
 namespace sip {
 
     /**
-     * @brief		入力クラス
+     * @brief        入力クラス
      */
     class Input : public IInput {
     protected:
@@ -22,15 +22,15 @@ namespace sip {
                 JoyPad,
             };
             struct Key {
-                int				positiveNo;
-                int				negativeNo;
-                int				padNo;
-                Type			type;
+                int                positiveNo;
+                int                negativeNo;
+                int                padNo;
+                Type            type;
             };
-            std::vector<Key>	key;
-            float				prevValue;
-            float				nowValue;
-            float				inputValue;
+            std::vector<Key>    key;
+            float                prevValue;
+            float                nowValue;
+            float                inputValue;
 
             KeyData()
                 : key()
@@ -40,62 +40,62 @@ namespace sip {
             }
         };
         using KeyMap = std::unordered_map<KeyType, KeyData >;
-        KeyMap					keyMap_;
+        KeyMap                    keyMap_;
 
         /**
-         * @brief		キーボードキーの取得
-         * @param[in]	positive		＋方向のキー
-         * @param[in]	negative		－方向のキー
-         * @return		キー入力の値
+         * @brief        キーボードキーの取得
+         * @param[in]    positive        ＋方向のキー
+         * @param[in]    negative        －方向のキー
+         * @return        キー入力の値
          */
         virtual float GetKeyboardKeyState(int positive, int negative) const = 0;
 
         /**
-         * @brief		マウスキーの取得
-         * @param[in]	positive		＋方向のキー
-         * @param[in]	negative		－方向のキー
-         * @return		キー入力の値
+         * @brief        マウスキーの取得
+         * @param[in]    positive        ＋方向のキー
+         * @param[in]    negative        －方向のキー
+         * @return        キー入力の値
          */
         virtual float GetMouseKeyState(int positive, int negative) const = 0;
 
         /**
-         * @brief		ジョイパッドキーの取得
-         * @param[in]	padNo			パッド番号
-         * @param[in]	positive		＋方向のキー
-         * @param[in]	negative		－方向のキー
-         * @return		キー入力の値
+         * @brief        ジョイパッドキーの取得
+         * @param[in]    padNo            パッド番号
+         * @param[in]    positive        ＋方向のキー
+         * @param[in]    negative        －方向のキー
+         * @return        キー入力の値
          */
         virtual float GetJoypadKeyState(int padNo, int positive, int negative) const = 0;
 
         /**
-         * @brief		ジョイパッドスティックの取得
-         * @param[in]	padNo			パッド番号
-         * @return		キー入力の値
+         * @brief        ジョイパッドスティックの取得
+         * @param[in]    padNo            パッド番号
+         * @return        キー入力の値
          */
         virtual float GetJoypadStickHorizontal(int padNo) const = 0;
 
         /**
-         * @brief		ジョイパッドスティックの取得
-         * @param[in]	padNo			パッド番号
-         * @return		キー入力の値
+         * @brief        ジョイパッドスティックの取得
+         * @param[in]    padNo            パッド番号
+         * @return        キー入力の値
          */
         virtual float GetJoypadStickVertical(int padNo) const = 0;
     public:
         /**
-         * @brief		コンストラクタ
+         * @brief        コンストラクタ
          */
         Input()
             : keyMap_() {
         }
         /**
-         * @brief		デストラクタ
+         * @brief        デストラクタ
          */
         ~Input() override = default;
 
         /**
-         * @brief		登録キーの追加
-         * @param[in]	kn				登録キー名
-         * @param[in]	key				登録キー
+         * @brief        登録キーの追加
+         * @param[in]    kn                登録キー名
+         * @param[in]    key                登録キー
          */
         void AddKeyboardKey(const KeyType& kn, int key) {
             auto km = keyMap_.find(kn);
@@ -108,10 +108,10 @@ namespace sip {
         }
 
         /**
-         * @brief		登録キーの追加
-         * @param[in]	kn				登録キー名
-         * @param[in]	positiveKey		+方向の登録キー
-         * @param[in]	negativeKey		-方向の登録キー
+         * @brief        登録キーの追加
+         * @param[in]    kn                登録キー名
+         * @param[in]    positiveKey        +方向の登録キー
+         * @param[in]    negativeKey        -方向の登録キー
          */
         void AddKeyboardKey(const KeyType& kn, int positiveKey, int negativeKey) {
             auto km = keyMap_.find(kn);
@@ -124,9 +124,9 @@ namespace sip {
         }
 
         /**
-         * @brief		登録キーの追加
-         * @param[in]	kn		登録キー名
-         * @param[in]	Key		登録キー
+         * @brief        登録キーの追加
+         * @param[in]    kn        登録キー名
+         * @param[in]    Key        登録キー
          */
         void AddMouseKey(const KeyType& kn, int Key) {
             auto km = keyMap_.find(kn);
@@ -139,10 +139,10 @@ namespace sip {
         }
 
         /**
-         * @brief		登録キーの追加
-         * @param[in]	kn				登録キー名
-         * @param[in]	pad				登録パッド
-         * @param[in]	key				登録キー
+         * @brief        登録キーの追加
+         * @param[in]    kn                登録キー名
+         * @param[in]    pad                登録パッド
+         * @param[in]    key                登録キー
          */
         void AddJoypadKey(const KeyType& kn, int pad, int key) {
             auto km = keyMap_.find(kn);
@@ -155,9 +155,9 @@ namespace sip {
         }
 
         /**
-         * @brief		登録キーの追加
-         * @param[in]	kn				登録キー名
-         * @param[in]	pad				登録パッド
+         * @brief        登録キーの追加
+         * @param[in]    kn                登録キー名
+         * @param[in]    pad                登録パッド
          */
         void AddJoyStickHorizontal(const KeyType& kn, int pad) {
             auto km = keyMap_.find(kn);
@@ -170,9 +170,9 @@ namespace sip {
         }
 
         /**
-         * @brief		登録キーの追加
-         * @param[in]	kn				登録キー名
-         * @param[in]	pad				登録パッド
+         * @brief        登録キーの追加
+         * @param[in]    kn                登録キー名
+         * @param[in]    pad                登録パッド
          */
         void AddJoyStickVertical(const KeyType& kn, int pad) {
             auto km = keyMap_.find(kn);
@@ -185,14 +185,14 @@ namespace sip {
         }
 
         /**
-         * @brief		更新
+         * @brief        更新
          */
         void Update() override;
 
         /**
-         * @brief		指定名称の登録キーの入力値を取得
-         * @param[in]	kn		登録キー名
-         * @return		キー入力の値
+         * @brief        指定名称の登録キーの入力値を取得
+         * @param[in]    kn        登録キー名
+         * @return        キー入力の値
          */
         float GetAxis(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -202,10 +202,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに押されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押された
-         *				false	このフレームでは押されていない
+         * @brief        指定名称の登録キーがこのフレームに押されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押された
+         *                false    このフレームでは押されていない
          */
         bool IsPush(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -215,10 +215,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに押されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押された
-         *				false	このフレームでは押されていない
+         * @brief        指定名称の登録キーがこのフレームに押されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押された
+         *                false    このフレームでは押されていない
          */
         bool IsNegativePush(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -228,10 +228,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに離されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで離された
-         *				false	このフレームでは離されていない
+         * @brief        指定名称の登録キーがこのフレームに離されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで離された
+         *                false    このフレームでは離されていない
          */
         bool IsPull(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -241,10 +241,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに離されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで離された
-         *				false	このフレームでは離されていない
+         * @brief        指定名称の登録キーがこのフレームに離されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで離された
+         *                false    このフレームでは離されていない
          */
         bool IsNegativePull(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -254,10 +254,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーが押されているかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押されている
-         *				false	このフレームで押されていない
+         * @brief        指定名称の登録キーが押されているかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押されている
+         *                false    このフレームで押されていない
          */
         bool IsPress(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -267,10 +267,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーが押されているかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押されている
-         *				false	このフレームで押されていない
+         * @brief        指定名称の登録キーが押されているかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押されている
+         *                false    このフレームで押されていない
          */
         bool IsNegativePress(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -280,8 +280,8 @@ namespace sip {
         }
 
         /**
-         * @brief		登録されているキー配列
-         * @return		キーの識別配列
+         * @brief        登録されているキー配列
+         * @return        キーの識別配列
          */
         std::vector<KeyType> GetKeyList() const override {
             std::vector<KeyType> keys;

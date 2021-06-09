@@ -1,19 +1,19 @@
 #pragma once
 
-#include	"IInput.h"
+#include    "IInput.h"
 
 namespace sip {
 
     /**
-     * @brief		入力クラス
+     * @brief        入力クラス
      */
     class ReplayInput : public IInput {
     protected:
         /** キー状態 */
         struct KeyData {
-            float				prevValue;
-            float				nowValue;
-            float				inputValue;
+            float                prevValue;
+            float                nowValue;
+            float                inputValue;
 
             KeyData()
                 : prevValue(0)
@@ -22,13 +22,13 @@ namespace sip {
             }
         };
         using KeyMap = std::unordered_map<KeyType, KeyData >;
-        KeyMap					keyMap_;
+        KeyMap                    keyMap_;
 
         /** ファイルストリーム */
-        std::ifstream			file_;
+        std::ifstream            file_;
 
         /**
-         * @brief		ファイルからのキー読み込み
+         * @brief        ファイルからのキー読み込み
          */
         template < typename T = KeyType >
         T ReadKey(unsigned char size) {
@@ -38,7 +38,7 @@ namespace sip {
         }
 
         /**
-         * @brief		ファイルからのキー読み込み
+         * @brief        ファイルからのキー読み込み
          */
         template < >
         std::string ReadKey<std::string>(unsigned char size) {
@@ -49,7 +49,7 @@ namespace sip {
 
     public:
         /**
-         * @brief		コンストラクタ
+         * @brief        コンストラクタ
          */
         ReplayInput(const std::string& name)
             : keyMap_()
@@ -57,14 +57,14 @@ namespace sip {
             file_.open(name, std::ios::in | std::ios::binary);
         }
         /**
-         * @brief		デストラクタ
+         * @brief        デストラクタ
          */
         ~ReplayInput() {
             file_.close();
         }
 
         /**
-         * @brief		更新
+         * @brief        更新
          */
         void Update() override {
             for (auto& key : keyMap_) {
@@ -85,9 +85,9 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーの入力値を取得
-         * @param[in]	kn		登録キー名
-         * @return		キー入力の値
+         * @brief        指定名称の登録キーの入力値を取得
+         * @param[in]    kn        登録キー名
+         * @return        キー入力の値
          */
         float GetAxis(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -97,10 +97,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに押されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押された
-         *				false	このフレームでは押されていない
+         * @brief        指定名称の登録キーがこのフレームに押されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押された
+         *                false    このフレームでは押されていない
          */
         bool IsPush(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -110,10 +110,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに押されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押された
-         *				false	このフレームでは押されていない
+         * @brief        指定名称の登録キーがこのフレームに押されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押された
+         *                false    このフレームでは押されていない
          */
         bool IsNegativePush(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -123,10 +123,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに離されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで離された
-         *				false	このフレームでは離されていない
+         * @brief        指定名称の登録キーがこのフレームに離されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで離された
+         *                false    このフレームでは離されていない
          */
         bool IsPull(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -136,10 +136,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに離されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで離された
-         *				false	このフレームでは離されていない
+         * @brief        指定名称の登録キーがこのフレームに離されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで離された
+         *                false    このフレームでは離されていない
          */
         bool IsNegativePull(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -149,10 +149,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーが押されているかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押されている
-         *				false	このフレームで押されていない
+         * @brief        指定名称の登録キーが押されているかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押されている
+         *                false    このフレームで押されていない
          */
         bool IsPress(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -162,10 +162,10 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーが押されているかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押されている
-         *				false	このフレームで押されていない
+         * @brief        指定名称の登録キーが押されているかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押されている
+         *                false    このフレームで押されていない
          */
         bool IsNegativePress(const KeyType& kn) const override {
             const auto& v = keyMap_.find(kn);
@@ -175,8 +175,8 @@ namespace sip {
         }
 
         /**
-         * @brief		登録されているキー配列
-         * @return		キーの識別配列
+         * @brief        登録されているキー配列
+         * @return        キーの識別配列
          */
         std::vector<KeyType> GetKeyList() const override {
             std::vector<KeyType> keys;

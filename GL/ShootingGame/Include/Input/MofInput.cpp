@@ -1,15 +1,15 @@
-#include	"MofInput.h"
+#include    "MofInput.h"
 
 #ifdef __MOFLIB
-#include	<Mof.h>
+#include    <Mof.h>
 
 using namespace sip;
 
 /**
- * @brief		キーボードキーの取得
- * @param[in]	positive		＋方向のキー
- * @param[in]	negative		－方向のキー
- * @return		キー入力の値
+ * @brief        キーボードキーの取得
+ * @param[in]    positive        ＋方向のキー
+ * @param[in]    negative        －方向のキー
+ * @return        キー入力の値
  */
 float MofInput::GetKeyboardKeyState(int positive, int negative) const {
     if (positive >= 0 && g_pInput->IsKeyHold(positive)) { return 1.0f; }
@@ -19,10 +19,10 @@ float MofInput::GetKeyboardKeyState(int positive, int negative) const {
 
 
 /**
- * @brief		マウスキーの取得
- * @param[in]	positive		＋方向のキー
- * @param[in]	negative		－方向のキー
- * @return		キー入力の値
+ * @brief        マウスキーの取得
+ * @param[in]    positive        ＋方向のキー
+ * @param[in]    negative        －方向のキー
+ * @return        キー入力の値
  */
 float MofInput::GetMouseKeyState(int positive, int negative) const {
     if (positive >= 0 && g_pInput->IsMouseKeyHold(positive)) { return 1.0f; }
@@ -31,11 +31,11 @@ float MofInput::GetMouseKeyState(int positive, int negative) const {
 }
 
 /**
- * @brief		ジョイパッドキーの取得
- * @param[in]	padNo			パッド番号
- * @param[in]	positive		＋方向のキー
- * @param[in]	negative		－方向のキー
- * @return		キー入力の値
+ * @brief        ジョイパッドキーの取得
+ * @param[in]    padNo            パッド番号
+ * @param[in]    positive        ＋方向のキー
+ * @param[in]    negative        －方向のキー
+ * @return        キー入力の値
  */
 float MofInput::GetJoypadKeyState(int padNo, int positive, int negative) const {
     LPGamePad pad = g_pInput->GetGamePad(padNo);
@@ -48,9 +48,9 @@ float MofInput::GetJoypadKeyState(int padNo, int positive, int negative) const {
 }
 
 /**
- * @brief		ジョイパッドスティックの取得
- * @param[in]	padNo			パッド番号
- * @return		キー入力の値
+ * @brief        ジョイパッドスティックの取得
+ * @param[in]    padNo            パッド番号
+ * @return        キー入力の値
  */
 float MofInput::GetJoypadStickHorizontal(int padNo) const {
     LPGamePad pad = g_pInput->GetGamePad(padNo);
@@ -61,9 +61,9 @@ float MofInput::GetJoypadStickHorizontal(int padNo) const {
 }
 
 /**
- * @brief		ジョイパッドスティックの取得
- * @param[in]	padNo			パッド番号
- * @return		キー入力の値
+ * @brief        ジョイパッドスティックの取得
+ * @param[in]    padNo            パッド番号
+ * @return        キー入力の値
  */
 float MofInput::GetJoypadStickVertical(int padNo) const {
     LPGamePad pad = g_pInput->GetGamePad(padNo);

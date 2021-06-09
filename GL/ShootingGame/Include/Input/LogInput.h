@@ -1,23 +1,23 @@
 #pragma once
 
-#include	"IInput.h"
+#include    "IInput.h"
 
 namespace sip {
 
     /**
-     * @brief		入力クラス
+     * @brief        入力クラス
      */
     class LogInput : public IInput {
     protected:
         /** 入力クラス */
-        InputPtr				input_;
+        InputPtr                input_;
 
         /** ファイルストリーム */
-        std::ofstream			file_;
+        std::ofstream            file_;
 
         /**
-         * @brief		ログの名前を作成
-         * @return		ログの名前
+         * @brief        ログの名前を作成
+         * @return        ログの名前
          */
         std::string CreateLogName() {
             time_t t = time(nullptr);
@@ -35,7 +35,7 @@ namespace sip {
         }
 
         /**
-         * @brief		ファイルへのキー出力
+         * @brief        ファイルへのキー出力
          */
         template < typename T = KeyType >
         void WriteKey(const T& key) {
@@ -45,7 +45,7 @@ namespace sip {
         }
 
         /**
-         * @brief		ファイルへのキー出力
+         * @brief        ファイルへのキー出力
          */
         template < >
         inline void WriteKey<std::string>(const std::string& key) {
@@ -56,7 +56,7 @@ namespace sip {
 
     public:
         /**
-         * @brief		コンストラクタ
+         * @brief        コンストラクタ
          */
         LogInput()
             : input_() {
@@ -67,14 +67,14 @@ namespace sip {
             file_.open(name, std::ios::out | std::ios::binary | std::ios::trunc);
         }
         /**
-         * @brief		デストラクタ
+         * @brief        デストラクタ
          */
         ~LogInput() {
             file_.close();
         }
 
         /**
-         * @brief		入力認識の登録
+         * @brief        入力認識の登録
          */
         template< class T >
         std::shared_ptr<T> CreateInput() {
@@ -84,7 +84,7 @@ namespace sip {
         }
 
         /**
-         * @brief		入力認識の登録
+         * @brief        入力認識の登録
          */
         template< class T, typename... _Types >
         std::shared_ptr<T> CreateInput(_Types&& ... _Args) {
@@ -94,7 +94,7 @@ namespace sip {
         }
 
         /**
-         * @brief		更新
+         * @brief        更新
          */
         void Update() override {
             input_->Update();
@@ -112,77 +112,77 @@ namespace sip {
         }
 
         /**
-         * @brief		指定名称の登録キーの入力値を取得
-         * @param[in]	kn		登録キー名
-         * @return		キー入力の値
+         * @brief        指定名称の登録キーの入力値を取得
+         * @param[in]    kn        登録キー名
+         * @return        キー入力の値
          */
         float GetAxis(const KeyType& kn) const override {
             return input_->GetAxis(kn);
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに押されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押された
-         *				false	このフレームでは押されていない
+         * @brief        指定名称の登録キーがこのフレームに押されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押された
+         *                false    このフレームでは押されていない
          */
         bool IsPush(const KeyType& kn) const override {
             return input_->IsPush(kn);
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに押されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押された
-         *				false	このフレームでは押されていない
+         * @brief        指定名称の登録キーがこのフレームに押されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押された
+         *                false    このフレームでは押されていない
          */
         bool IsNegativePush(const KeyType& kn) const override {
             return input_->IsNegativePush(kn);
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに離されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで離された
-         *				false	このフレームでは離されていない
+         * @brief        指定名称の登録キーがこのフレームに離されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで離された
+         *                false    このフレームでは離されていない
          */
         bool IsPull(const KeyType& kn) const override {
             return input_->IsPull(kn);
         }
 
         /**
-         * @brief		指定名称の登録キーがこのフレームに離されたかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで離された
-         *				false	このフレームでは離されていない
+         * @brief        指定名称の登録キーがこのフレームに離されたかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで離された
+         *                false    このフレームでは離されていない
          */
         bool IsNegativePull(const KeyType& kn) const override {
             return input_->IsNegativePull(kn);
         }
 
         /**
-         * @brief		指定名称の登録キーが押されているかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押されている
-         *				false	このフレームで押されていない
+         * @brief        指定名称の登録キーが押されているかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押されている
+         *                false    このフレームで押されていない
          */
         bool IsPress(const KeyType& kn) const override {
             return input_->IsPress(kn);
         }
 
         /**
-         * @brief		指定名称の登録キーが押されているかどうか
-         * @param[in]	kn		登録キー名
-         * @return		true	このフレームで押されている
-         *				false	このフレームで押されていない
+         * @brief        指定名称の登録キーが押されているかどうか
+         * @param[in]    kn        登録キー名
+         * @return        true    このフレームで押されている
+         *                false    このフレームで押されていない
          */
         bool IsNegativePress(const KeyType& kn) const override {
             return input_->IsNegativePress(kn);
         }
 
         /**
-         * @brief		登録されているキー配列
-         * @return		キーの識別配列
+         * @brief        登録されているキー配列
+         * @return        キーの識別配列
          */
         std::vector<KeyType> GetKeyList() const override {
             return input_->GetKeyList();

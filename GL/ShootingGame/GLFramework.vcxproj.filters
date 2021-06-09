@@ -70,6 +70,12 @@
     <Filter Include="Include\Input">
       <UniqueIdentifier>{4fca6c1c-7796-4dda-89f7-00cd98ebfe0c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\Render">
+      <UniqueIdentifier>{3249a940-372d-4f59-b29c-eb9ce8552631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Common">
+      <UniqueIdentifier>{29a9cc10-7942-4a07-ba6b-8b24f95ce742}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -99,23 +105,35 @@
     <ClCompile Include="Application.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Input.cpp">
-      <Filter>Include\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\MofInput.cpp">
-      <Filter>Include\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\WinApiInput.cpp">
-      <Filter>Include\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\GLInput.cpp">
-      <Filter>Include\Input</Filter>
-    </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Input\GLInput.cpp">
+      <Filter>Include\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Input\Input.cpp">
+      <Filter>Include\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Input\MofInput.cpp">
+      <Filter>Include\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Input\WinApiInput.cpp">
+      <Filter>Include\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Render\GLRenderClearCommand.cpp">
+      <Filter>Include\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Render\GLRenderEndCommand.cpp">
+      <Filter>Include\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Render\GLRenderStartCommand.cpp">
+      <Filter>Include\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Render\GLSpriteRenderCommand.cpp">
+      <Filter>Include\Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,30 +203,6 @@
     <ClInclude Include="Framework\Input\Input.h">
       <Filter>Framework\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Include\IInput.h">
-      <Filter>Include\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Input.h">
-      <Filter>Include\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\InputManager.h">
-      <Filter>Include\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\LogInput.h">
-      <Filter>Include\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\MofInput.h">
-      <Filter>Include\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\ReplayInput.h">
-      <Filter>Include\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\WinApiInput.h">
-      <Filter>Include\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\GLInput.h">
-      <Filter>Include\Input</Filter>
-    </ClInclude>
     <ClInclude Include="GameScene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -220,6 +214,75 @@
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Input\GLInput.h">
+      <Filter>Include\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Input\IInput.h">
+      <Filter>Include\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Input\Input.h">
+      <Filter>Include\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Input\InputManager.h">
+      <Filter>Include\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Input\LogInput.h">
+      <Filter>Include\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Input\MofInput.h">
+      <Filter>Include\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Input\ReplayInput.h">
+      <Filter>Include\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Input\WinApiInput.h">
+      <Filter>Include\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\IRenderCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\IRenderRegister.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\RenderClearCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\RenderCommandTask.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\RenderEndCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\RenderManager.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\RenderStartCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Common\ICommand.h">
+      <Filter>Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\GLRenderClearCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\GLRenderEndCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWorkManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\GLRenderStartCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\SpriteRenderCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Common\Sprite.h">
+      <Filter>Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\GLSpriteRenderCommand.h">
+      <Filter>Include\Render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

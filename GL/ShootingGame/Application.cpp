@@ -2,9 +2,14 @@
 
 #include    "Application.h"
 
-#include    "Include/InputManager.h"
-#include    "Include/GLInput.h"
-#include    "Include/LogInput.h"
+#include    "Include/Input/InputManager.h"
+#include    "Include/Input/GLInput.h"
+#include    "Include/Input/LogInput.h"
+
+#include    "Include/Render/RenderManager.h"
+#include    "Include/Render/RenderCommandTask.h"
+#include    "Include/Render/RenderClearCommand.h"
+#include    "Include/Render/SpriteRenderCommand.h"
 
 using namespace Sample;
 
@@ -32,6 +37,7 @@ Application::Application()
  */
 Application::~Application() {
     InputManagerInstance.Release();
+    RenderManagerInstance.Release();
 }
 
 /**
@@ -88,22 +94,15 @@ void Application::Update() {
  * @brief        描画
  */
 void Application::Render() {
-    //初期設定と画面クリア
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClearDepth(1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glEnable(GL_CULL_FACE);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    auto render_task = sip::RenderManager::CreateTask<sip::RenderCommandTask>(1);
+
+    render_task->Push(sip::RenderClearCommand::Create(0, 0, 0, 0, 1, 0), 0);
 
     //TODO:
     //アプリの描画処理を記述
     sprite->Position(position);
-    sprite->RefreshMatrix();
-    sprite->Render();
+    render_task->Push(sip::SpriteRenderCommand::Create(sprite), 0);
 
-    //画面に表示
-    glfwSwapBuffers(window_);
-    glfwPollEvents();
+    RenderManagerInstance.Push(render_task);
 }

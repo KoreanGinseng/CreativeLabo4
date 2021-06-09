@@ -66,6 +66,11 @@ namespace Sample {
          * @brief        フレームワークの実行
          */
         virtual void Run();
+
+        /**
+        * @brief         ウィンドウ取得
+        */
+        GLFWwindow* GetWindow();
     };
 
 }

@@ -92,10 +92,15 @@ void Framework::Run() {
 
         //アプリの描画
         Render();
+        glfwPollEvents();
     }
 
     //アプリ終了
     INFO_LOG("Frameworkの終了...");
     audio_.reset();
     glfwDestroyWindow(window_);
+}
+
+GLFWwindow* Framework::GetWindow() {
+    return window_;
 }

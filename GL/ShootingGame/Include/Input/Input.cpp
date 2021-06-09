@@ -1,9 +1,9 @@
-#include	"Input.h"
+#include    "Input.h"
 
 using namespace sip;
 
 /**
- * @brief		更新
+ * @brief        更新
  */
 void Input::Update() {
     for (auto k = keyMap_.begin(); k != keyMap_.end(); ++k) {

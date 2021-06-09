@@ -150,8 +150,7 @@ bool Shader::Enable() {
  * @brief        シェーダーへのパラメーター設定
  */
 bool Shader::BindTexture(GLuint no, GLuint id) {
-    glActiveTexture(GL_TEXTURE0 + no);
-    glBindTexture(GL_TEXTURE_2D, id);
+    glBindTextureUnit(no, id);
     return true;
 }
 
