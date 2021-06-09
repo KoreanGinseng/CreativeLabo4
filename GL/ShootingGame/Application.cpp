@@ -69,6 +69,7 @@ void Application::Initialize() {
     sound = std::make_shared<Sound>("se_enter.wav");
 
     InputManagerInstance.AddInput<sip::LogInput>()->CreateInput<sip::GLInput>(input_);
+    glfwMakeContextCurrent(nullptr);
 }
 
 /**
@@ -97,7 +98,7 @@ void Application::Render() {
 
     auto render_task = sip::RenderManager::CreateTask<sip::RenderCommandTask>(1);
 
-    render_task->Push(sip::RenderClearCommand::Create(0, 0, 0, 0, 1, 0), 0);
+    render_task->Push(sip::RenderClearCommand::Create(0, 1, 1, 0, 1, 0), 0);
 
     //TODO:
     //アプリの描画処理を記述

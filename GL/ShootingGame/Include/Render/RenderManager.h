@@ -4,6 +4,7 @@
 #include    "RenderStartCommand.h"
 #include    "RenderEndCommand.h"
 #include    "../../Framework/Common/Singleton.h"
+#include    "../../FrameWorkManager.h"
 
 namespace sip {
 
@@ -54,6 +55,7 @@ namespace sip {
          * @brief        描画スレッド
          */
         void Exec() {
+            glfwMakeContextCurrent(FrameWorkManagerInstance.GetWindow());
             while (run_) {
                 //タスクを取り出し
                 RenderCommandTaskPtr task = Pop();
