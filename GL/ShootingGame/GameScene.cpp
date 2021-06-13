@@ -12,5 +12,5 @@ void GameScene::Initialize() {
 void GameScene::Update() {
 }
 
-void GameScene::Render() {
+void GameScene::Render(sip::RenderCommandTask& render_task) {
 }

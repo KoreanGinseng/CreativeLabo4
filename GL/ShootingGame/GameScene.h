@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Common/Common.h"
+#include "Include/Render/RenderCommandTask.h"
 
 class GameScene {
 private:
@@ -10,10 +11,10 @@ public:
 
     ~GameScene();
 
-    void Initialize();
+    virtual void Initialize();
 
-    void Update();
+    virtual void Update();
 
-    void Render();
+    virtual void Render(sip::RenderCommandTask& render_task);
 };
 
