@@ -76,6 +76,15 @@
     <Filter Include="Include\Common">
       <UniqueIdentifier>{29a9cc10-7942-4a07-ba6b-8b24f95ce742}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\External">
+      <UniqueIdentifier>{4f8841b5-cb25-4e53-be39-4d27876b5f97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\External\nlohman">
+      <UniqueIdentifier>{45b019fb-2e6e-4110-be0f-3b88ecfb7ff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Resource">
+      <UniqueIdentifier>{08cd1786-378c-454a-9f72-4f66e3bd817e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -108,9 +117,6 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Include\Input\GLInput.cpp">
       <Filter>Include\Input</Filter>
     </ClCompile>
@@ -134,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="Include\Render\GLSpriteRenderCommand.cpp">
       <Filter>Include\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +292,33 @@
     </ClInclude>
     <ClInclude Include="Include\Render\GLSpriteRenderCommand.h">
       <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\External\nlohmann\json.hpp">
+      <Filter>Include\External\nlohman</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Resource\JsonResourceLoadHelper.h">
+      <Filter>Include\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Resource\JsonResourcePackCreator.h">
+      <Filter>Include\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Resource\JsonTextureResourceCreator.h">
+      <Filter>Include\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Resource\ResourceContainer.h">
+      <Filter>Include\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Resource\ResourceManager.h">
+      <Filter>Include\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Resource\ResourcePack.h">
+      <Filter>Include\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Resource\Texture.h">
+      <Filter>Include\Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

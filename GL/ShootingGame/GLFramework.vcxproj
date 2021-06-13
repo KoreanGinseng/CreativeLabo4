@@ -146,7 +146,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Framework\Framework\Framework.cpp" />
     <ClCompile Include="Framework\Graphics\Buffer.cpp" />
     <ClCompile Include="Framework\Graphics\Shader.cpp" />
@@ -164,6 +163,7 @@
     <ClCompile Include="Include\Render\GLRenderStartCommand.cpp" />
     <ClCompile Include="Include\Render\GLSpriteRenderCommand.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -193,6 +193,7 @@
     <ClInclude Include="Framework\Timer\IFrameTimer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Include\External\nlohmann\json.hpp" />
     <ClInclude Include="Include\Render\GLSpriteRenderCommand.h" />
     <ClInclude Include="Include\Common\ICommand.h" />
     <ClInclude Include="Include\Common\Sprite.h" />
@@ -215,6 +216,14 @@
     <ClInclude Include="Include\Render\RenderManager.h" />
     <ClInclude Include="Include\Render\RenderStartCommand.h" />
     <ClInclude Include="Include\Render\SpriteRenderCommand.h" />
+    <ClInclude Include="Include\Resource\JsonResourceLoadHelper.h" />
+    <ClInclude Include="Include\Resource\JsonResourcePackCreator.h" />
+    <ClInclude Include="Include\Resource\JsonTextureResourceCreator.h" />
+    <ClInclude Include="Include\Resource\ResourceContainer.h" />
+    <ClInclude Include="Include\Resource\ResourceManager.h" />
+    <ClInclude Include="Include\Resource\ResourcePack.h" />
+    <ClInclude Include="Include\Resource\Texture.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
