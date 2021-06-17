@@ -1,6 +1,7 @@
 #pragma once
 #include "Framework/Common/Singleton.h"
 #include "SceneBase.h"
+#include "Include/Render/RenderCommandTask.h"
 
 template<class Key, class SceneData = EmptyData>
 class SceneManager : public Sample::Singleton<SceneManager> {
@@ -11,6 +12,8 @@ private:
         FadeOut,
         Active,
     } transition_;
+
+    float               timer_;
 
     SceneData           sceneData_;
 
@@ -43,6 +46,39 @@ public:
             return;
         }
         nextScene_ = factory();
+        transition_ = Transition::FadeOut;
+    }
+
+    void Initialize(const Key& initScene) {
+        current_ = initScene;
+        auto factory = sceneFactories_.find(current_);
+        if (factory == sceneFactories_.end()) {
+            currentScene_ = nullptr;
+            return;
+        }
+        currentScene_ = factory();
+        transition_ = Transition::FadeIn;
+    }
+
+    void Update() {
+        switch (transition_) {
+        case Transition::FadeIn:
+        {
+            timer_++;
+        } break;
+        case Transition::FadeOut:
+        {
+            timer_++;
+        } break;
+        case Transition::Active:
+        {
+            currentScene_->Update();
+        } break;
+        }
+    }
+
+    void Render(sip::RenderCommandTaskPtr& render_task) {
+
     }
 };
 
