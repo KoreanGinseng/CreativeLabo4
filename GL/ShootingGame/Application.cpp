@@ -10,6 +10,7 @@
 #include    "Include/Render/RenderCommandTask.h"
 #include    "Include/Render/RenderClearCommand.h"
 #include    "Include/Render/SpriteRenderCommand.h"
+#include    "Include/Render/RenderFillRectCommand.h"
 
 using namespace Sample;
 
@@ -104,6 +105,6 @@ void Application::Render() {
     //アプリの描画処理を記述
     sprite->Position(position);
     render_task->Push(sip::SpriteRenderCommand::Create(sprite), 0);
-
+    render_task->Push(sip::RenderFillRectCommand::Create(Rectangle(0.0f, 0.0f, 100.0f, 100.0f), Vector4(1, 1, 1, 1)), 0);
     RenderManagerInstance.Push(render_task);
 }

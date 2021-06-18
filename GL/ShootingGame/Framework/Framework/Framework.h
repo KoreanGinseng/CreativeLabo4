@@ -71,6 +71,16 @@ namespace Sample {
         * @brief         ウィンドウ取得
         */
         GLFWwindow* GetWindow();
+
+        /**
+        * @brief         ウィンドウ取得
+        */
+        int GetWindowWidth() const;
+
+        /**
+        * @brief         ウィンドウ取得
+        */
+        int GetWindowHeight() const;
     };
 
 }

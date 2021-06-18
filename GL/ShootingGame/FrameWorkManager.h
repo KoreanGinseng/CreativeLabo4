@@ -22,6 +22,16 @@ public:
         return nullptr;
     }
 
+    int GetWindowWidth() const {
+        if (framework_) return framework_->GetWindowWidth();
+        return 0;
+    }
+
+    int GetWindowHeight() const {
+        if (framework_) return framework_->GetWindowHeight();
+        return 0;
+    }
+
     /**
     * @brief         フレームワークの設定
     * @param[in]     framework     フレームワークポインタ

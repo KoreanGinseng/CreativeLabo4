@@ -6,26 +6,26 @@ using namespace Sample;
  * @brief        エラー発生時に呼び出されるコールバック
  */
 void ErrorCallback(int error, const char* desc) {
-    ERROR_LOG(desc);
+	ERROR_LOG(desc);
 }
 
 /**
  * @brief        コンストラクタ
  */
 Framework::Framework()
-    : window_(nullptr)
-    , timer_(std::make_shared<GLFrameTimer>(60))
-    , audio_(std::make_shared<Audio>())
-    , input_()
-    , width_(0)
-    , height_(0) {
+	: window_(nullptr)
+	, timer_(std::make_shared<GLFrameTimer>(60))
+	, audio_(std::make_shared<Audio>())
+	, input_()
+	, width_(0)
+	, height_(0) {
 }
 
 /**
  * @brief        デストラクタ
  */
 Framework::~Framework() {
-    glfwTerminate();
+	glfwTerminate();
 }
 
 /**
@@ -35,72 +35,86 @@ Framework::~Framework() {
  * @param[in]    title    ウインドウタイトル
  */
 bool Framework::Create(int w, int h, const char* title) {
-    //GLFWの初期化
-    glfwSetErrorCallback(ErrorCallback);
-    if (glfwInit() != GL_TRUE) {
-        return false;
-    }
-    //ウインドウの生成
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-    glfwWindowHint(GLFW_MAXIMIZED, GL_FALSE);
-    window_ = glfwCreateWindow(w, h, title, nullptr, nullptr);
-    if (!window_) {
-        return false;
-    }
-    width_ = w;
-    height_ = h;
-    glfwMakeContextCurrent(window_);
+	//GLFWの初期化
+	glfwSetErrorCallback(ErrorCallback);
+	if (glfwInit() != GL_TRUE) {
+		return false;
+	}
+	//ウインドウの生成
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	glfwWindowHint(GLFW_MAXIMIZED, GL_FALSE);
+	window_ = glfwCreateWindow(w, h, title, nullptr, nullptr);
+	if (!window_) {
+		return false;
+	}
+	width_ = w;
+	height_ = h;
+	glfwMakeContextCurrent(window_);
 
-    //GLEWの初期化
-    if (glewInit() != GLEW_OK) {
-        ERROR_LOG("GLEWの初期化に失敗しました");
-        return false;
-    }
+	//GLEWの初期化
+	if (glewInit() != GLEW_OK) {
+		ERROR_LOG("GLEWの初期化に失敗しました");
+		return false;
+	}
 
-    //Audio初期化
-    audio_->Initialize();
+	//Audio初期化
+	audio_->Initialize();
 
-    //入力の生成
-    input_ = std::make_shared<Input>(window_);
+	//入力の生成
+	input_ = std::make_shared<Input>(window_);
 
-    //GraphicsController初期化
-    GraphicsController::GetInstance().Initialize(window_);
+	//GraphicsController初期化
+	GraphicsController::GetInstance().Initialize(window_);
 
-    //初期化終了
-    INFO_LOG("Frameworkの初期化終了...");
-    return true;
+	//初期化終了
+	INFO_LOG("Frameworkの初期化終了...");
+	return true;
 }
 
 /**
  * @brief        フレームワークの実行
  */
 void Framework::Run() {
-    //初期化
-    Initialize();
+	//初期化
+	Initialize();
 
-    //アプリループ
-    while (!glfwWindowShouldClose(window_)) {
-        //タイマー処理
-        timer_->Refresh();
-        timer_->Sleep();
+	//アプリループ
+	while (!glfwWindowShouldClose(window_)) {
+		//タイマー処理
+		timer_->Refresh();
+		timer_->Sleep();
 
-        //入力の更新
-        input_->Refresh();
+		//入力の更新
+		input_->Refresh();
 
-        //アプリの更新
-        Update();
+		//アプリの更新
+		Update();
 
-        //アプリの描画
-        Render();
-        glfwPollEvents();
-    }
+		//アプリの描画
+		Render();
+		glfwPollEvents();
+	}
 
-    //アプリ終了
-    INFO_LOG("Frameworkの終了...");
-    audio_.reset();
-    glfwDestroyWindow(window_);
+	//アプリ終了
+	INFO_LOG("Frameworkの終了...");
+	audio_.reset();
+	glfwDestroyWindow(window_);
 }
 
 GLFWwindow* Framework::GetWindow() {
-    return window_;
+	return window_;
+}
+
+/**
+* @brief         ウィンドウ取得
+*/
+int Sample::Framework::GetWindowWidth() const {
+	return width_;
+}
+
+/**
+* @brief         ウィンドウ取得
+*/
+int Sample::Framework::GetWindowHeight() const {
+	return height_;
 }

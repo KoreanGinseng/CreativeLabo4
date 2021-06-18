@@ -44,6 +44,7 @@
 #include    "../../Library/include/GLM/glm.hpp"
 #include    "../../Library/include/GLM/mat4x4.hpp"
 #include    "../../Library/include/GLM/gtc/matrix_transform.hpp"
+#include    "../../Library/include/GLUT/glut.h"
 
 //PNGŠÖ˜A
 #ifdef _DEBUG

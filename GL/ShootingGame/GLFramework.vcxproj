@@ -160,11 +160,11 @@
     <ClCompile Include="Include\Input\WinApiInput.cpp" />
     <ClCompile Include="Include\Render\GLRenderClearCommand.cpp" />
     <ClCompile Include="Include\Render\GLRenderEndCommand.cpp" />
+    <ClCompile Include="Include\Render\GLRenderFillRectCommand.cpp" />
     <ClCompile Include="Include\Render\GLRenderStartCommand.cpp" />
     <ClCompile Include="Include\Render\GLSpriteRenderCommand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -194,7 +194,10 @@
     <ClInclude Include="Framework\Timer\IFrameTimer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Include\Common\Math.h" />
+    <ClInclude Include="Include\Common\Rectangle.h" />
     <ClInclude Include="Include\External\nlohmann\json.hpp" />
+    <ClInclude Include="Include\Render\GLRenderFillRectCommand.h" />
     <ClInclude Include="Include\Render\GLSpriteRenderCommand.h" />
     <ClInclude Include="Include\Common\ICommand.h" />
     <ClInclude Include="Include\Common\Sprite.h" />
@@ -214,6 +217,7 @@
     <ClInclude Include="Include\Render\RenderClearCommand.h" />
     <ClInclude Include="Include\Render\RenderCommandTask.h" />
     <ClInclude Include="Include\Render\RenderEndCommand.h" />
+    <ClInclude Include="Include\Render\RenderFillRectCommand.h" />
     <ClInclude Include="Include\Render\RenderManager.h" />
     <ClInclude Include="Include\Render\RenderStartCommand.h" />
     <ClInclude Include="Include\Render\SpriteRenderCommand.h" />
