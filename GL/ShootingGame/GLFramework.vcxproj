@@ -200,6 +200,7 @@
     <ClInclude Include="Framework\Timer\GLFrameTimer.h" />
     <ClInclude Include="Framework\Timer\WinFrameTimer.h" />
     <ClInclude Include="Framework\Timer\IFrameTimer.h" />
+    <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Include\Common\GraphicsController.h" />
@@ -243,6 +244,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

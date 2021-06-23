@@ -386,5 +386,11 @@
     <ClInclude Include="Include\Render\GLRenderResetTargetCommand.h">
       <Filter>Include\Render</Filter>
     </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDefine.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
