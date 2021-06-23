@@ -6,8 +6,8 @@ using namespace sip;
 void GLRenderFillRectCommand::Exec() {
     glColor4f(color_.r, color_.g, color_.b, color_.a);
     glBegin(GL_QUADS);
-    int w = glutGet(GLUT_WINDOW_X);
-    int h = glutGet(GLUT_WINDOW_Y);
+    int w = 1024;
+    int h = 768;
     
     if (w == 0.0f || h == 0.0f) {
         glEnd();
