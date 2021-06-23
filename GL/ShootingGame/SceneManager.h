@@ -2,6 +2,11 @@
 #include "Framework/Common/Singleton.h"
 #include "SceneBase.h"
 #include "Include/Render/RenderCommandTask.h"
+#include "Include/Render/RenderFrameBufferBindCommand.h"
+#include "Include/Render/RenderResetTargetCommand.h"
+#include "Include/Render/RenderClearCommand.h"
+#include "Include/Render/SpriteRenderCommand.h"
+#include "Include/Common/Math.h"
 
 template<class Key, class SceneData = EmptyData>
 class SceneManager : public Sample::Singleton<SceneManager> {
@@ -84,13 +89,33 @@ public:
         } break;
         case Transition::Active:
         {
-            currentScene_->Update();
         } break;
         }
+        currentScene_->Update();
     }
 
     void Render(sip::RenderCommandTaskPtr& render_task) {
-
+        auto& buffer = currentScene_->GetFrameBuffer();
+        auto& sprite = currentScene_->GetFrameSprite();
+        float alpha  = 1.0f;
+        render_task->Push(sip::GLRenderFrameBufferBindCommand::Create(buffer), 0);
+        switch (transition_) {
+        case Transition::FadeIn:
+        {
+            alpha = (timer_ - transitionFrame_ * 0.5f) / (transitionFrame_ * 0.5f);
+        }
+        case Transition::FadeOut:
+        {
+            alpha = 1.0f - (timer_ / (transitionFrame_ * 0.5f));
+        }
+        case Transition::Active:
+        {
+        }
+        }
+        currentScene_->Render(render_task);
+        render_task->Push(sip::RenderResetTargetCommand::Create(), 0);
+        render_task->Push(sip::RenderClearCommand::Create(0, 0, 1, 1, 0, 0), 0);
+        render_task->Push(sip::SpriteRenderCommand::Create(sprite, alpha), 0);
     }
 };
 

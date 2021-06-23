@@ -5,29 +5,36 @@
 #include    "../Sound/Sound.h"
 #include    "../Input/Input.h"
 #include    "../Graphics/Sprite.h"
+#include	"../Graphics/SpriteBatch.h"
+#include	"../Graphics/FrameBuffer.h"
+#include	"../Graphics/ShaderParameterBind1F.h"
 #include    "../Graphics/GraphicsController.h"
+#include    "../Graphics/Shader.h"
 
 namespace Sample {
 
     class Framework {
     protected:
         /** GLウインドウ */
-        GLFWwindow* window_;
+        GLFWwindow*   window_;
 
         /** タイマー */
-        FrameTimerPtr    timer_;
+        FrameTimerPtr timer_;
 
         /** オーディオデバイス */
-        AudioPtr        audio_;
+        AudioPtr      audio_;
 
         /** 入力デバイス */
-        InputPtr        input_;
+        InputPtr      input_;
 
         /** ウインドウの幅 */
-        int                width_;
+        int           width_;
 
         /** ウインドウの高さ */
-        int                height_;
+        int           height_;
+
+        /** スプライト用シェーダー */
+        ShaderPtr     spriteShader_;
 
         /**
          * @brief        初期化

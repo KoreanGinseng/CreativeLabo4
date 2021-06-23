@@ -64,6 +64,12 @@
     <Filter Include="Framework\Sound\Sound">
       <UniqueIdentifier>{5a33470a-ebe7-4a34-95f4-793fa751d71c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Graphics\FrameBuffer">
+      <UniqueIdentifier>{da9ec471-48d5-4e3f-a0e3-c0f454560357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Sampler">
+      <UniqueIdentifier>{80fc096e-6d02-4ac5-8cbc-7e5900e0e3b1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Include">
       <UniqueIdentifier>{f022057b-7764-43cc-90ba-5d6f0b536350}</UniqueIdentifier>
     </Filter>
@@ -114,6 +120,9 @@
     <ClCompile Include="Application.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Graphics\FrameBuffer.cpp">
+      <Filter>Framework\Graphics\FrameBuffer</Filter>
+    </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -144,8 +153,14 @@
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Render\GLRenderFillRectCommand.cpp">
+    <ClCompile Include="Include\Render\GLRenderFrameBufferBindCommand.cpp">
       <Filter>Include\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Render\GLRenderResetTargetCommand.cpp">
+      <Filter>Include\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="Framework\Graphics\GraphicsController.h">
       <Filter>Framework\Graphics\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\Input.h">
+      <Filter>Framework\Input</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Sound\Audio.h">
       <Filter>Framework\Sound\Audio</Filter>
@@ -329,8 +347,20 @@
     <ClInclude Include="SceneManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Render\RenderFillRectCommand.h">
-      <Filter>Include\Render</Filter>
+    <ClInclude Include="Framework\Graphics\SpriteBatch.h">
+      <Filter>Framework\Graphics\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\FrameBuffer.h">
+      <Filter>Framework\Graphics\FrameBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\ShaderParameterBind.h">
+      <Filter>Framework\Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\ShaderParameterBind1F.h">
+      <Filter>Framework\Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Sampler.h">
+      <Filter>Framework\Graphics\Sampler</Filter>
     </ClInclude>
     <ClInclude Include="Include\Common\Rectangle.h">
       <Filter>Include\Common</Filter>
@@ -338,7 +368,22 @@
     <ClInclude Include="Include\Common\Math.h">
       <Filter>Include\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Render\GLRenderFillRectCommand.h">
+    <ClInclude Include="Include\Common\GraphicsController.h">
+      <Filter>Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\RenderFrameBufferBindCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Common\FrameBuffer.h">
+      <Filter>Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\GLRenderFrameBufferBindCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\RenderResetTargetCommand.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Render\GLRenderResetTargetCommand.h">
       <Filter>Include\Render</Filter>
     </ClInclude>
   </ItemGroup>

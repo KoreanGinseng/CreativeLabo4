@@ -42,7 +42,9 @@ namespace Sample {
         void Create2D(int w, int h) {
             const glm::vec2 hs(w * 0.5f, h * 0.5f);
             const glm::mat4x4 matProj = glm::ortho(-hs.x, hs.x, -hs.y, hs.y, 1.0f, 1000.0f);
-            const glm::mat4x4 matView = glm::lookAt(glm::vec3(hs.x + position_.x, -hs.y - position_.y, 100), glm::vec3(hs.x + position_.x, -hs.y - position_.y, 0), glm::vec3(0, 1, 0));
+			const glm::mat4x4 matView = glm::lookAt(
+				glm::vec3(hs.x + position_.x, -hs.y - position_.y, 100),
+				glm::vec3(hs.x + position_.x, -hs.y - position_.y, 0), glm::vec3(0, 1, 0));
             matVP_ = matProj * matView;
         }
 

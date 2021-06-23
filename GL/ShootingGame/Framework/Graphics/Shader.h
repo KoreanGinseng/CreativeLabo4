@@ -18,9 +18,6 @@ namespace Sample {
         /** モデル行列 */
         GLint        matModel_;
 
-        /** テクスチャカラー */
-        GLint        texColor_;
-
         /**
          * @brief        シェーダーのコンパイル命令
          */
@@ -73,6 +70,10 @@ namespace Sample {
         /**
          * @brief        シェーダーへのパラメーター設定
          */
+		bool BindSampler(GLuint no, GLuint id);
+		/**
+		 * @brief		シェーダーへのパラメーター設定
+		 */
         bool SetViewProjectionMatrix(const float* fv);
         /**
          * @brief        シェーダーへのパラメーター設定

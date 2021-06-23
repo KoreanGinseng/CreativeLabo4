@@ -40,6 +40,13 @@ bool Framework::Create(int w, int h, const char* title) {
 	if (glfwInit() != GL_TRUE) {
 		return false;
 	}
+
+	//GLバージョンやプロファイルの設定
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+
 	//ウインドウの生成
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_MAXIMIZED, GL_FALSE);

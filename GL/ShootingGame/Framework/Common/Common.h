@@ -33,6 +33,11 @@
 #include    <thread>
 #include    <mutex>
 
+//WINDOWS—p
+#include	<windows.h>
+#include	<ks.h>
+#include	<ksmedia.h>
+
 //OpenGLŠÖ˜A
 #pragma comment (lib, "Library/lib32/GL/OpenGL32.lib")
 #pragma comment (lib, "Library/lib32/GLEW/glew32.lib")
@@ -60,11 +65,6 @@
 
 #include    "../../Library/include/AL/al.h"
 #include    "../../Library/include/AL/alc.h"
-
-//WINDOWS—p
-#include    <windows.h>
-#include    <ks.h>
-#include    <ksmedia.h>
 
 //SAFEDELETE
 #define        SAFE_DELETE(x)        {if(x){ delete x; x = nullptr;} }

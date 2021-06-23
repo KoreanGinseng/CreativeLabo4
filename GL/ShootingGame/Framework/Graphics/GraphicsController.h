@@ -2,6 +2,7 @@
 
 #include    "../Common/Common.h"
 #include    "../Common/Singleton.h"
+#include    "../Graphics/Shader.h"
 #include    "Camera.h"
 
 namespace Sample {
@@ -13,19 +14,22 @@ namespace Sample {
         friend class Singleton<GraphicsController>;
     private:
         /** ウインドウ */
-        GLFWwindow* window_;
+        GLFWwindow*                                    window_;
         /** メインカメラ */
-        CameraPtr                                    currentCamera_;
-        /**    画面幅 */
+        CameraPtr                                      currentCamera_;
+        /** 画面幅 */
         int                                            width_;
-        /**    画面高さ */
+        /** 画面高さ */
         int                                            height_;
+        /** スプライト用シェーダー */
+        ShaderPtr                                      spriteShader_;
 
         GraphicsController()
             : window_(nullptr)
             , currentCamera_()
             , width_(0)
-            , height_(0) {
+            , height_(0)
+            , spriteShader_(nullptr) {
         }
         virtual ~GraphicsController() = default;
     public:
@@ -37,7 +41,23 @@ namespace Sample {
             glfwGetWindowSize(w, &width_, &height_);
         }
 
+        void SpriteShader(const ShaderPtr& ptr) {
+            spriteShader_ = ptr;
+        }
+
+        ShaderPtr SpriteShader() {
+            return spriteShader_;
+        }
+
         /**
+		 * @brief		ターゲットのリセット
+		 */
+		void ResetTarget() {
+			glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+			glViewport(0, 0, width_, height_);
+		}
+
+		/**
          * @brief        利用中のカメラの設定
          * @param[in]    cam        利用中のカメラ
          */

@@ -9,8 +9,7 @@ Shader::Shader()
     : ResourceBase()
     , id_(0)
     , matVP_(-1)
-    , matModel_(-1)
-    , texColor_(-1) {
+, matModel_(-1) {
 }
 
 /**
@@ -21,8 +20,7 @@ Shader::Shader(const char* name)
     : ResourceBase()
     , id_(0)
     , matVP_(-1)
-    , matModel_(-1)
-    , texColor_(-1) {
+, matModel_(-1) {
     std::string tstr = name;
     size_t pos = tstr.find("/", 0);
     std::string vname = tstr.substr(0, pos);
@@ -38,8 +36,7 @@ Shader::Shader(const char* vname, const char* fname)
     : ResourceBase()
     , id_(0)
     , matVP_(-1)
-    , matModel_(-1)
-    , texColor_(-1) {
+, matModel_(-1) {
     Load(vname, fname);
 }
 
@@ -125,8 +122,8 @@ bool Shader::Load(const char* vname, const char* fname) {
     glUseProgram(id_);
     matVP_ = GetUniformLocation("matVP");
     matModel_ = GetUniformLocation("matModel");
-    texColor_ = GetUniformLocation("texColor");
-    glUniform1i(texColor_, 0);
+	GLint texColor = GetUniformLocation("texColor");
+	glUniform1i(texColor, 0);
     glUseProgram(0);
 
     name_ = vname;
@@ -156,6 +153,14 @@ bool Shader::BindTexture(GLuint no, GLuint id) {
 
 /**
  * @brief        シェーダーへのパラメーター設定
+ */
+bool Shader::BindSampler(GLuint no, GLuint id) {
+	glBindSampler(no, id);
+	return true;
+}
+
+/**
+ * @brief		シェーダーへのパラメーター設定
  */
 bool Shader::SetViewProjectionMatrix(const float* fv) {
     glUniformMatrix4fv(matVP_, 1, GL_FALSE, fv);

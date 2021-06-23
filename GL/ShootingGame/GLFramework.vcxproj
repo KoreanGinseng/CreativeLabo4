@@ -148,6 +148,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Framework\Framework\Framework.cpp" />
     <ClCompile Include="Framework\Graphics\Buffer.cpp" />
+    <ClCompile Include="Framework\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="Framework\Graphics\Shader.cpp" />
     <ClCompile Include="Framework\Graphics\Texture.cpp" />
     <ClCompile Include="Framework\Sound\Audio.cpp" />
@@ -160,11 +161,13 @@
     <ClCompile Include="Include\Input\WinApiInput.cpp" />
     <ClCompile Include="Include\Render\GLRenderClearCommand.cpp" />
     <ClCompile Include="Include\Render\GLRenderEndCommand.cpp" />
-    <ClCompile Include="Include\Render\GLRenderFillRectCommand.cpp" />
+    <ClCompile Include="Include\Render\GLRenderFrameBufferBindCommand.cpp" />
+    <ClCompile Include="Include\Render\GLRenderResetTargetCommand.cpp" />
     <ClCompile Include="Include\Render\GLRenderStartCommand.cpp" />
     <ClCompile Include="Include\Render\GLSpriteRenderCommand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -175,9 +178,14 @@
     <ClInclude Include="Framework\Framework\Framework.h" />
     <ClInclude Include="Framework\Graphics\Buffer.h" />
     <ClInclude Include="Framework\Graphics\Camera.h" />
+    <ClInclude Include="Framework\Graphics\FrameBuffer.h" />
     <ClInclude Include="Framework\Graphics\GraphicsController.h" />
+    <ClInclude Include="Framework\Graphics\Sampler.h" />
     <ClInclude Include="Framework\Graphics\Shader.h" />
+    <ClInclude Include="Framework\Graphics\ShaderParameterBind.h" />
+    <ClInclude Include="Framework\Graphics\ShaderParameterBind1F.h" />
     <ClInclude Include="Framework\Graphics\Sprite.h" />
+    <ClInclude Include="Framework\Graphics\SpriteBatch.h" />
     <ClInclude Include="Framework\Graphics\Texture.h" />
     <ClInclude Include="Framework\Input\IInput.h" />
     <ClInclude Include="Framework\Input\Input.h" />
@@ -194,10 +202,13 @@
     <ClInclude Include="Framework\Timer\IFrameTimer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Include\Common\GraphicsController.h" />
     <ClInclude Include="Include\Common\Math.h" />
     <ClInclude Include="Include\Common\Rectangle.h" />
     <ClInclude Include="Include\External\nlohmann\json.hpp" />
-    <ClInclude Include="Include\Render\GLRenderFillRectCommand.h" />
+    <ClInclude Include="Include\Common\FrameBuffer.h" />
+    <ClInclude Include="Include\Render\GLRenderFrameBufferBindCommand.h" />
+    <ClInclude Include="Include\Render\GLRenderResetTargetCommand.h" />
     <ClInclude Include="Include\Render\GLSpriteRenderCommand.h" />
     <ClInclude Include="Include\Common\ICommand.h" />
     <ClInclude Include="Include\Common\Sprite.h" />
@@ -217,8 +228,9 @@
     <ClInclude Include="Include\Render\RenderClearCommand.h" />
     <ClInclude Include="Include\Render\RenderCommandTask.h" />
     <ClInclude Include="Include\Render\RenderEndCommand.h" />
-    <ClInclude Include="Include\Render\RenderFillRectCommand.h" />
+    <ClInclude Include="Include\Render\RenderFrameBufferBindCommand.h" />
     <ClInclude Include="Include\Render\RenderManager.h" />
+    <ClInclude Include="Include\Render\RenderResetTargetCommand.h" />
     <ClInclude Include="Include\Render\RenderStartCommand.h" />
     <ClInclude Include="Include\Render\SpriteRenderCommand.h" />
     <ClInclude Include="Include\Resource\JsonResourceLoadHelper.h" />

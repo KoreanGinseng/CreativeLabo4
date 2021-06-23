@@ -10,21 +10,16 @@
 #include    "Include/Render/RenderCommandTask.h"
 #include    "Include/Render/RenderClearCommand.h"
 #include    "Include/Render/SpriteRenderCommand.h"
-#include    "Include/Render/RenderFillRectCommand.h"
+#include    "Include/Render/RenderFrameBufferBindCommand.h"
+#include    "Include/Render/RenderResetTargetCommand.h"
 
 using namespace Sample;
 
 //描画関連
-ShaderPtr shader;
-TexturePtr texture;
-SpritePtr sprite;
 CameraPtr camera;
 
 //音関連
 SoundPtr sound;
-
-//キャラクター座標
-Vector3F position(0, 0, 0);
 
 /**
  * @brief        コンストラクタ
@@ -46,20 +41,11 @@ Application::~Application() {
  */
 void Application::Initialize() {
     //リソースディレクトリを素材配置先に指定
-    ::SetCurrentDirectory(L"Resources"); 
-
-    //TODO:
-    //アプリの初期化処理を記述
-
-    //画像読み込み
-    texture = std::make_shared<Texture>("title.png");
+    ::SetCurrentDirectory(L"Resources");
 
     //シェーダー読み込み
-    shader = std::make_shared<Shader>("Sprite.vert", "Sprite.frag");
-
-    //描画用スプライト生成
-    sprite = std::make_shared<Sprite>();
-    sprite->Create(texture, shader);
+    spriteShader_ = std::make_shared<Shader>("Sprite.vert", "Sprite.frag");
+    GraphicsController::GetInstance().SpriteShader(spriteShader_);
 
     //カメラ設定
     camera = std::make_shared<Camera>();
@@ -84,12 +70,6 @@ void Application::Update() {
     if (input_->GetKeyState(GLFW_KEY_ENTER)) {
         sound->Play();
     }
-    if (input_->GetKeyState(GLFW_KEY_LEFT)) {
-        position.x--;
-    }
-    if (input_->GetKeyState(GLFW_KEY_RIGHT)) {
-        position.x++;
-    }
 }
 
 /**
@@ -99,12 +79,6 @@ void Application::Render() {
 
     auto render_task = sip::RenderManager::CreateTask<sip::RenderCommandTask>(1);
 
-    render_task->Push(sip::RenderClearCommand::Create(0, 1, 1, 0, 1, 0), 0);
-
-    //TODO:
-    //アプリの描画処理を記述
-    sprite->Position(position);
-    render_task->Push(sip::SpriteRenderCommand::Create(sprite), 0);
-    render_task->Push(sip::RenderFillRectCommand::Create(Rectangle(0.0f, 0.0f, 100.0f, 100.0f), Vector4(1, 1, 1, 1)), 0);
+    
     RenderManagerInstance.Push(render_task);
 }

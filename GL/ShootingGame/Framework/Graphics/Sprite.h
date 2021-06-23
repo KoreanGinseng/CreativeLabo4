@@ -3,8 +3,10 @@
 #include    "../Math/Rectangle.h"
 #include    "../Math/Vector4.h"
 #include    "Texture.h"
+#include	"Sampler.h"
 #include    "Buffer.h"
 #include    "Shader.h"
+#include	"ShaderParameterBind.h"
 #include    "GraphicsController.h"
 
 namespace Sample {
@@ -41,6 +43,8 @@ namespace Sample {
 
         /** 利用するテクスチャ */
         TexturePtr    texture_;
+		/** 利用するサンプラ */
+		SamplerPtr	sampler_;
         /** 利用する画像 */
         ShaderPtr    shader_;
 
@@ -89,10 +93,10 @@ namespace Sample {
             float uy = pivot_.y * srcRect_.Height();
             float by = (1 - pivot_.y) * -srcRect_.Height();
             //頂点代入
-            out[0].pos[0] = lx + offset_[0].x;    out[0].pos[1] = by + offset_[0].y;    out[0].pos[2] = 0 + offset_[0].z;    out[0].uv[0] = lt;    out[0].uv[1] = bt;
-            out[1].pos[0] = rx + offset_[1].x;    out[1].pos[1] = by + offset_[1].y;    out[1].pos[2] = 0 + offset_[1].z;    out[1].uv[0] = rt;    out[1].uv[1] = bt;
-            out[2].pos[0] = lx + offset_[2].x;    out[2].pos[1] = uy + offset_[2].y;    out[2].pos[2] = 0 + offset_[2].z;    out[2].uv[0] = lt;    out[2].uv[1] = ut;
-            out[3].pos[0] = rx + offset_[3].x;    out[3].pos[1] = uy + offset_[3].y;    out[3].pos[2] = 0 + offset_[3].z;    out[3].uv[0] = rt;    out[3].uv[1] = ut;
+			out[0].pos[0] = lx + offset_[0].x;	out[0].pos[1] = by - offset_[0].y;	out[0].pos[2] = 0 + offset_[0].z;	out[0].uv[0] = lt;	out[0].uv[1] = bt;
+			out[1].pos[0] = rx + offset_[1].x;	out[1].pos[1] = by - offset_[1].y;	out[1].pos[2] = 0 + offset_[1].z;	out[1].uv[0] = rt;	out[1].uv[1] = bt;
+			out[2].pos[0] = lx + offset_[2].x;	out[2].pos[1] = uy - offset_[2].y;	out[2].pos[2] = 0 + offset_[2].z;	out[2].uv[0] = lt;	out[2].uv[1] = ut;
+			out[3].pos[0] = rx + offset_[3].x;	out[3].pos[1] = uy - offset_[3].y;	out[3].pos[2] = 0 + offset_[3].z;	out[3].uv[0] = rt;	out[3].uv[1] = ut;
         }
 
     public:
@@ -111,6 +115,7 @@ namespace Sample {
             , xflip_(false)
             , yflip_(false)
             , texture_()
+		, sampler_()
             , shader_()
             , vertexBuffer_()
             , indexBuffer_()
@@ -132,6 +137,7 @@ namespace Sample {
             , xflip_(obj.xflip_)
             , yflip_(obj.yflip_)
             , texture_(obj.texture_)
+		, sampler_(obj.sampler_)
             , shader_(obj.shader_)
             , vertexBuffer_()
             , indexBuffer_()
@@ -220,7 +226,7 @@ namespace Sample {
         /**
          * @brief        スプライトを表示させる
          */
-        void Render() {
+		void Render(const ShaderParameterBindList& binder = {}) {
             glBindVertexArray(vertexArrayID);
             glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer_.ID());
             shader_->Enable();
@@ -229,10 +235,16 @@ namespace Sample {
             shader_->SetViewProjectionMatrix(&mvp[0][0]);
             shader_->SetModelMatrix(&matModel_[0][0]);
             glUniform4fv(colorLocation, 1, &color_[0]);
+			std::for_each(binder.begin(), binder.end(), [](const ShaderParameterBindPtr& ptr) { ptr->Bind(); });
 
+			if (sampler_)
+			{
+				shader_->BindSampler(0, sampler_->ID());
+			}
             shader_->BindTexture(0, texture_->ID());
             glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_SHORT, 0);
             shader_->BindTexture(0, 0);
+			shader_->BindSampler(0, 0);
 
             glBindVertexArray(0);
             glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -339,6 +351,17 @@ namespace Sample {
         }
 
         /**
+		 * @brief		color_へのAccessor
+		 * @param[in]	c	色
+		 */
+		void Color(const Vector4F& c) { color_ = c; }
+		/**
+		 * @brief		color_へのAccessor
+		 * @return		色
+		 */
+		const Vector4F& Color() const noexcept { return color_; }
+
+		/**
          * @brief        xflip_へのAccessor
          * @param[in]    f    反転フラグ
          */
@@ -365,6 +388,18 @@ namespace Sample {
         const bool YFlip() const noexcept { return yflip_; }
 
         /**
+		 * @brief		頂点オフセットへのAccessor
+		 * @param[in]	n	オフセット番号
+		 * @param[in]	p	オフセット位置
+		 */
+		void VertexOffset(const int n, const Vector3F& p) { offset_[n] = p; }
+		/**
+		 * @brief		頂点オフセットへのAccessor
+		 * @return		頂点オフセット
+		 */
+		const Vector3F* VertexOffset() const noexcept { return offset_; }
+
+		/**
          * @brief        Texture_へのAccessor
          * @return        テクスチャ
          */
@@ -373,6 +408,19 @@ namespace Sample {
         }
 
         /**
+		 * @brief		Sampler_へのAccessor
+		 * @return		サンプラ
+		 */
+		void Sampler(const SamplerPtr& v) noexcept { sampler_ = v; }
+		/**
+		 * @brief		Sampler_へのAccessor
+		 * @return		サンプラ
+		 */
+		const SamplerPtr Sampler(void) const {
+			return sampler_;
+		}
+
+		/**
          * @brief        ShaderへのAccessor
          * @return        シェーダー
          */
