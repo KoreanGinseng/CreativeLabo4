@@ -1,6 +1,7 @@
 #pragma once
 
 #include    "Framework/Framework/Framework.h"
+#include    "GameDefine.h"
 
 namespace Sample {
 

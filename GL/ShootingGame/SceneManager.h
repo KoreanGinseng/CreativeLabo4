@@ -9,7 +9,8 @@
 #include "Include/Common/Math.h"
 
 template<class Key, class SceneData = EmptyData>
-class SceneManager : public Sample::Singleton<SceneManager> {
+class SceneManager : public Sample::Singleton<SceneManager<Key, SceneData>> {
+    friend class Sample::Singleton<SceneManager<Key, SceneData>>;
 private:
 
     enum class Transition {
@@ -29,9 +30,10 @@ private:
     Key                 current_;
     Key                 next_;
 
-    using SceneFactory   = std::function<ScenePtr<SceneData>()>;
+    using SceneFactory   = std::function<ScenePtr<SceneData>(void)>;
     using SceneFactories = std::unordered_map<Key, SceneFactory>;
     SceneFactories      sceneFactories_;
+    sip::Vector4        fadeColor_;
 
 public:
 
@@ -40,7 +42,7 @@ public:
     void Add(const Key& key) {
         auto factory = sceneFactories_.find(key);
         if (factory == sceneFactories_.end()) {
-            sceneFactories_[key] = [=]() { return std::make_shared<Scene>(sceneData_); }
+            sceneFactories_[key] = [=]() { return std::make_shared<Scene>(sceneData_); };
         }
     }
 
@@ -53,20 +55,30 @@ public:
             nextScene_ = nullptr;
             return;
         }
-        nextScene_ = factory();
+        nextScene_ = factory->second();
+        nextScene_->Initialize();
         transition_ = Transition::FadeOut;
+    }
+
+    void FadeColor(const sip::Vector4& color) {
+        fadeColor_ = color;
+    }
+
+    sip::Vector4 FadeColor(void) const {
+        return fadeColor_;
     }
 
     void Initialize(const Key& initScene, int transitionFrame = 60) {
         current_ = initScene;
-        timer_ = 0;
+        timer_ = transitionFrame * 0.5f;
         transitionFrame_ = transitionFrame;
         auto factory = sceneFactories_.find(current_);
         if (factory == sceneFactories_.end()) {
             currentScene_ = nullptr;
             return;
         }
-        currentScene_ = factory();
+        currentScene_ = factory->second();
+        currentScene_->Initialize();
         transition_ = Transition::FadeIn;
     }
 
@@ -75,7 +87,7 @@ public:
         case Transition::FadeIn:
         {
             timer_++;
-            if (transitionFrame_ >= timer_) {
+            if (transitionFrame_ <= timer_) {
                 timer_ = -1;
                 transition_ = Transition::Active;
             }
@@ -83,8 +95,11 @@ public:
         case Transition::FadeOut:
         {
             timer_++;
-            if (transitionFrame_ * 0.5f >= timer_) {
-                transition_ = Transition::FadeIn;
+            if (transitionFrame_ * 0.5f <= timer_) {
+                transition_   = Transition::FadeIn;
+                current_      = next_;
+                currentScene_ = nextScene_;
+                nextScene_    = nullptr;
             }
         } break;
         case Transition::Active:
@@ -95,27 +110,35 @@ public:
     }
 
     void Render(sip::RenderCommandTaskPtr& render_task) {
-        auto& buffer = currentScene_->GetFrameBuffer();
-        auto& sprite = currentScene_->GetFrameSprite();
+        auto  buffer = currentScene_->GetFrameBuffer();
+        auto  sprite = currentScene_->GetFrameSprite();
         float alpha  = 1.0f;
         render_task->Push(sip::GLRenderFrameBufferBindCommand::Create(buffer), 0);
         switch (transition_) {
         case Transition::FadeIn:
         {
             alpha = (timer_ - transitionFrame_ * 0.5f) / (transitionFrame_ * 0.5f);
-        }
+        } break;
         case Transition::FadeOut:
         {
             alpha = 1.0f - (timer_ / (transitionFrame_ * 0.5f));
-        }
+        } break;
         case Transition::Active:
         {
-        }
+        } break;
         }
         currentScene_->Render(render_task);
         render_task->Push(sip::RenderResetTargetCommand::Create(), 0);
-        render_task->Push(sip::RenderClearCommand::Create(0, 0, 1, 1, 0, 0), 0);
+        render_task->Push(sip::RenderClearCommand::Create(fadeColor_.r, fadeColor_.g, fadeColor_.b, 1, 0, 0), 0);
         render_task->Push(sip::SpriteRenderCommand::Create(sprite, alpha), 0);
+    }
+
+    const SceneData& GetSceneData(void) const {
+        return sceneData_;
+    }
+
+    SceneData* GetSceneData(void) {
+        return &sceneData_;
     }
 };
 

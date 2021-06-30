@@ -12,6 +12,10 @@
 #include    "Include/Render/SpriteRenderCommand.h"
 #include    "Include/Render/RenderFrameBufferBindCommand.h"
 #include    "Include/Render/RenderResetTargetCommand.h"
+#include    "Include/Render/ContextGuard.h"
+
+#include    "TitleScene.h"
+#include    "GameScene.h"
 
 using namespace Sample;
 
@@ -40,6 +44,7 @@ Application::~Application() {
  * @brief        初期化
  */
 void Application::Initialize() {
+
     //リソースディレクトリを素材配置先に指定
     ::SetCurrentDirectory(L"Resources");
 
@@ -55,8 +60,16 @@ void Application::Initialize() {
     //音読み込み
     sound = std::make_shared<Sound>("se_enter.wav");
 
-    InputManagerInstance.AddInput<sip::LogInput>()->CreateInput<sip::GLInput>(input_);
-    glfwMakeContextCurrent(nullptr);
+    auto sceneData = SceneManagerInstance.GetSceneData();
+    auto input = InputManagerInstance.AddInput<sip::LogInput>()->CreateInput<sip::GLInput>(input_);
+    input->AddKeyboardKey("test_1", GLFW_KEY_1);
+    sceneData->input_ = input;
+
+    //Scene
+    SceneManagerInstance.Add<TitleScene>(SceneName::Title);
+    SceneManagerInstance.Add<GameScene>(SceneName::Game);
+    SceneManagerInstance.Initialize(SceneName::Title, 120);
+    SceneManagerInstance.FadeColor(sip::Vector4(1.0f, 0.0f, 1.0f, 1.0f));
 }
 
 /**
@@ -70,6 +83,8 @@ void Application::Update() {
     if (input_->GetKeyState(GLFW_KEY_ENTER)) {
         sound->Play();
     }
+
+    SceneManagerInstance.Update();
 }
 
 /**
@@ -79,6 +94,7 @@ void Application::Render() {
 
     auto render_task = sip::RenderManager::CreateTask<sip::RenderCommandTask>(1);
 
+    SceneManagerInstance.Render(render_task);
     
     RenderManagerInstance.Push(render_task);
 }

@@ -392,5 +392,8 @@
     <ClInclude Include="GameDefine.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Render\ContextGuard.h">
+      <Filter>Include\Render</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

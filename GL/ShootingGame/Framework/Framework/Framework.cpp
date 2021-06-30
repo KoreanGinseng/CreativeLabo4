@@ -1,4 +1,5 @@
 #include    "Framework.h"
+#include    "../../Include/Render/ContextGuard.h"
 
 using namespace Sample;
 
@@ -56,7 +57,8 @@ bool Framework::Create(int w, int h, const char* title) {
 	}
 	width_ = w;
 	height_ = h;
-	glfwMakeContextCurrent(window_);
+
+	sip::ContextGuard contextGuard(window_);
 
 	//GLEW‚Ì‰Šú‰»
 	if (glewInit() != GLEW_OK) {

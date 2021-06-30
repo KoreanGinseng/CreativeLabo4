@@ -20,15 +20,19 @@ namespace sip {
     private:
 
         /** 描画キュー */
-        RenderCommandTaskQueue        queue_;
+        RenderCommandTaskQueue       queue_;
         /** 過去の描画キュー */
         RenderCommandTaskList        executedTask_;
         /** ロック */
-        std::mutex                    lock_;
+        std::mutex                   lock_;
         /** スレッド */
-        std::thread                    thread_;
+        std::thread                  thread_;
         /** 実行フラグ */
-        bool                        run_;
+        bool                         run_;
+        
+        bool                         context_;
+
+        bool                         set_context_;
 
         /**
          * @brief        コンストラクタ
@@ -39,7 +43,9 @@ namespace sip {
             , executedTask_()
             , lock_()
             , thread_()
-            , run_(true) {
+            , run_(true)
+            , set_context_(true)
+            , context_(false) {
             thread_ = std::thread([this] { Exec(); });
             executedTask_.reserve(ExecutedQueueCount);
         }
@@ -55,8 +61,18 @@ namespace sip {
          * @brief        描画スレッド
          */
         void Exec() {
-            glfwMakeContextCurrent(FrameWorkManagerInstance.GetWindow());
             while (run_) {
+                if (!context_) {
+                    if (set_context_) {
+                        continue;
+                    }
+                    SetContext(false);
+                    set_context_ = true;
+                }
+                else if (!set_context_) {
+                    SetContext(true);
+                    set_context_ = true;
+                }
                 //タスクを取り出し
                 RenderCommandTaskPtr task = Pop();
                 if (!task) {
@@ -116,6 +132,25 @@ namespace sip {
                 return RenderCommandTaskPtr();
             }
             return *(executedTask_.rbegin() + cnt);
+        }
+
+        void SetThreadContext(bool b) {
+            set_context_ = false;
+            context_ = b;
+        }
+
+        bool IsUseContext() const {
+            return context_;
+        }
+
+        bool IsActiveContext() const {
+            return set_context_;
+        }
+
+        static void SetContext(bool b, GLFWwindow* pointer = nullptr) {
+            GLFWwindow* window = (b ? FrameWorkManagerInstance.GetWindow() : nullptr);
+            if (b && pointer) window = pointer;
+            glfwMakeContextCurrent(window);
         }
     };
 

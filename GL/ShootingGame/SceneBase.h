@@ -4,6 +4,7 @@
 #include "Include/Common/FrameBuffer.h"
 #include "Include/Common/Sprite.h"
 #include "Include/Common/GraphicsController.h"
+#include "Include//Render/ContextGuard.h"
 
 struct EmptyData {};
 
@@ -18,6 +19,7 @@ protected:
 public:
 
     SceneBase(SceneData& sceneData) : sceneData_(sceneData) {
+        sip::ContextGuard contextGuard;
         //フレームバッファ生成
         frameBuffer_ = std::make_shared<FrameBuffer>();
         frameBuffer_->Create(GraphicsControllerInstance.ScreenWidth(),
@@ -31,7 +33,7 @@ public:
 
     virtual void Update() = 0;
 
-    virtual void Render(sip::RenderCommandTask& render_task) = 0;
+    virtual void Render(sip::RenderCommandTaskPtr& render_task) = 0;
 
     SceneData* GetSceneData() { return &sceneData_; }
     void SetSceneData(SceneData& sceneData) { sceneData_ = sceneData; }
