@@ -68,11 +68,14 @@ void Application::Initialize() {
     auto player_input1 = InputManagerInstance.AddInput<sip::LogInput>()->CreateInput<sip::GLInput>(input_);
     player_input1->AddKeyboardKey("Horizontal", GLFW_KEY_RIGHT, GLFW_KEY_LEFT);
     player_input1->AddKeyboardKey("Vertical"  , GLFW_KEY_DOWN , GLFW_KEY_UP  );
+    player_input1->AddKeyboardKey("Fire"      , GLFW_KEY_SPACE);
 
     //âÊëúì«Ç›çûÇ›
     ResourceManagerInstance.LoadPack("Title", "TitleResources.json");
     ResourceManagerInstance.LoadPack("Stage1", "Stage1Resources.json");
     ResourceManagerInstance.LoadPack("Player1", "Player1Resources.json");
+    ResourceManagerInstance.LoadPack("Enemies", "EnemyResources.json");
+    ResourceManagerInstance.LoadPack("Bullet", "BulletResources.json");
 
     //Scene
     SceneManagerInstance.FrameBufferCreate();

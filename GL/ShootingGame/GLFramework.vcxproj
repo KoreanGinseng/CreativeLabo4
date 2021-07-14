@@ -146,6 +146,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletManager.cpp" />
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Framework\Framework\Framework.cpp" />
     <ClCompile Include="Framework\Graphics\Buffer.cpp" />
     <ClCompile Include="Framework\Graphics\FrameBuffer.cpp" />
@@ -155,6 +160,8 @@
     <ClCompile Include="Framework\Sound\Sound.cpp" />
     <ClCompile Include="Framework\Sound\WaveFile.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GoStraightBullet.cpp" />
+    <ClCompile Include="GoStraightEnemy.cpp" />
     <ClCompile Include="Include\Input\GLInput.cpp" />
     <ClCompile Include="Include\Input\Input.cpp" />
     <ClCompile Include="Include\Input\MofInput.cpp" />
@@ -172,7 +179,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletManager.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="FrameWorkManager.h" />
     <ClInclude Include="Framework\Common\Common.h" />
     <ClInclude Include="Framework\Common\Singleton.h" />
@@ -204,6 +216,8 @@
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GoStraightBullet.h" />
+    <ClInclude Include="GoStraightEnemy.h" />
     <ClInclude Include="Include\Common\GraphicsController.h" />
     <ClInclude Include="Include\Common\Math.h" />
     <ClInclude Include="Include\Common\Rectangle.h" />
@@ -244,6 +258,7 @@
     <ClInclude Include="Include\Resource\ResourcePack.h" />
     <ClInclude Include="Include\Resource\Texture.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Stage.h" />

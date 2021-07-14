@@ -18,7 +18,6 @@ public:
 	}
 
 	virtual ~Character() override {
-		if (sprite_) { sprite_->Release(); }
 	}
 
 	const SpritePtr& Sprite() const { return sprite_; }
@@ -30,6 +29,10 @@ public:
 			hp_ = 0;
 		}
 	}
+
+	int HP() const { return hp_; }
+
+	virtual Circle GetCircle() const noexcept override { return Circle(posX_ + sprite_->Texture()->Width() * 0.5f, posY_ + sprite_->Texture()->Height() * 0.5f, radius_); }
 
 };
 

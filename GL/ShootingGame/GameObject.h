@@ -1,6 +1,7 @@
 #pragma once
 #include "Framework/Common/Common.h"
 #include "Include/Render/RenderManager.h"
+#include "Circle.h"
 
 class __declspec(novtable) GameObject {
 protected:
@@ -38,6 +39,8 @@ public:
     virtual float PosY() const noexcept { return posY_; }
 
     virtual float Radius() const noexcept { return radius_; }
+
+    virtual Circle GetCircle() const noexcept { return Circle(posX_, posY_, radius_); }
 };
 
 using GameObjectPtr = std::shared_ptr<GameObject>;

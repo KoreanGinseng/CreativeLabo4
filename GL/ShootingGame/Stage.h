@@ -21,5 +21,7 @@ public:
     void Update();
 
     void Render(sip::RenderCommandTaskPtr& render_task);
-};
+
+    int Scroll() const { return scroll_; }
+}; 
 

@@ -1,0 +1,64 @@
+{
+  "Sprites": [
+    {
+      "Key": "Enemy1",
+      "File": "Enemy/Enemy01.png"
+    },
+    {
+      "Key": "Enemy2",
+      "File": "Enemy/Enemy02.png"
+    },
+    {
+      "Key": "Enemy3",
+      "File": "Enemy/Enemy03.png"
+    },
+    {
+      "Key": "Enemy4",
+      "File": "Enemy/Enemy04.png"
+    },
+    {
+      "Key": "Enemy5",
+      "File": "Enemy/Enemy05.png"
+    },
+    {
+      "Key": "Enemy6",
+      "File": "Enemy/Enemy06.png"
+    },
+    {
+      "Key": "Enemy7",
+      "File": "Enemy/Enemy07.png"
+    },
+    {
+      "Key": "Enemy8",
+      "File": "Enemy/Enemy08.png"
+    },
+    {
+      "Key": "Enemy9",
+      "File": "Enemy/Enemy09.png"
+    },
+    {
+      "Key": "Enemy10",
+      "File": "Enemy/Enemy10.png"
+    },
+    {
+      "Key": "Enemy11",
+      "File": "Enemy/Enemy11.png"
+    },
+    {
+      "Key": "Enemy12",
+      "File": "Enemy/Enemy12.png"
+    },
+    {
+      "Key": "Enemy13",
+      "File": "Enemy/Enemy13.png"
+    },
+    {
+      "Key": "Enemy14",
+      "File": "Enemy/Enemy14.png"
+    },
+    {
+      "Key": "Enemy15",
+      "File": "Enemy/Enemy15.png"
+    }
+  ]
+}

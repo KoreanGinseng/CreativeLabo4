@@ -1,0 +1,40 @@
+{
+  "Sprites": [
+    {
+      "Key": "Bullet1",
+      "File": "Bullets/01Bullets.png"
+    },
+    {
+      "Key": "Bullet2",
+      "File": "Bullets/02Bullets.png"
+    },
+    {
+      "Key": "Bullet3",
+      "File": "Bullets/03Bullets.png"
+    },
+    {
+      "Key": "Bullet4",
+      "File": "Bullets/04Bullets.png"
+    },
+    {
+      "Key": "Bullet5",
+      "File": "Bullets/05Bullets.png"
+    },
+    {
+      "Key": "Bullet6",
+      "File": "Bullets/06Bullets.png"
+    },
+    {
+      "Key": "Bullet7",
+      "File": "Bullets/07Bullets.png"
+    },
+    {
+      "Key": "Bullet8",
+      "File": "Bullets/08Bullets.png"
+    },
+    {
+      "Key": "Bullet9",
+      "File": "Bullets/09Bullets.png"
+    }
+  ]
+}
