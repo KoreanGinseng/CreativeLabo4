@@ -167,6 +167,7 @@
     <ClCompile Include="Include\Render\GLSpriteRenderCommand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -237,7 +238,7 @@
     <ClInclude Include="Include\Render\SpriteRenderCommand.h" />
     <ClInclude Include="Include\Resource\JsonResourceLoadHelper.h" />
     <ClInclude Include="Include\Resource\JsonResourcePackCreator.h" />
-    <ClInclude Include="Include\Resource\JsonTextureResourceCreator.h" />
+    <ClInclude Include="Include\Resource\JsonSpriteResourceCreator.h" />
     <ClInclude Include="Include\Resource\ResourceContainer.h" />
     <ClInclude Include="Include\Resource\ResourceManager.h" />
     <ClInclude Include="Include\Resource\ResourcePack.h" />
@@ -245,6 +246,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

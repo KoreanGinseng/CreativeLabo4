@@ -7,6 +7,8 @@ GLRenderEndCommand::GLRenderEndCommand(GLFWwindow* window)
 }
 
 void GLRenderEndCommand::Exec() {
-    //‰æ–Ê‚É•\Ž¦
-    glfwSwapBuffers(window_);
+    if (window_) {
+        //‰æ–Ê‚É•\Ž¦
+        glfwSwapBuffers(window_);
+    }
 }

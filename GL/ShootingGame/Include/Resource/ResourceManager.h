@@ -3,7 +3,7 @@
 #include	"ResourcePack.h"
 #include	"JsonResourcePackCreator.h"
 #include	"JsonResourceLoadHelper.h"
-#include	"../Common/Singleton.h"
+#include	"../../Framework/Common/Singleton.h"
 
 namespace sip {
 
@@ -11,8 +11,8 @@ namespace sip {
      * @brief		リソース管理
      */
     template <typename... Types>
-    class ResourceManager : public Singleton<ResourceManager<Types...>> {
-        friend class Singleton<ResourceManager<Types...>>;
+    class ResourceManager : public Sample::Singleton<ResourceManager<Types...>> {
+        friend class Sample::Singleton<ResourceManager<Types...>>;
     private:
         std::unordered_map< ResourceContainerKeyType, ResourcePackPtr<Types...> > resources_;
 
@@ -95,6 +95,7 @@ namespace sip {
 
 //簡易アクセス用
 #include	"Texture.h"
-#include	"JsonTextureResourceCreator.h"
-#define UsedResources sip::Texture
+#include    "../Common/Sprite.h"
+#include	"JsonSpriteResourceCreator.h"
+#define UsedResources Sprite
 #define ResourceManagerInstance	sip::ResourceManager<UsedResources>::GetInstance()

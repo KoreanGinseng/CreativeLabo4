@@ -20,6 +20,7 @@ namespace sip {
 #endif // __MOFLIB
 #ifdef __GLLIB
 #include "../../Framework/Graphics/Texture.h"
+    using Texture    = Sample::Texture;
     using TexturePtr = Sample::TexturePtr;
 #endif // __GLLIB
 }

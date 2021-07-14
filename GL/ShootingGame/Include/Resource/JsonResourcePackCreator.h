@@ -1,6 +1,7 @@
 #pragma once
 
 #include	"ResourcePack.h"
+#include    "JsonResourceLoadHelper.h"
 #include	"../External/nlohmann/json.hpp"
 
 namespace sip {

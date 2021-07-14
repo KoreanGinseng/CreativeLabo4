@@ -27,7 +27,7 @@ namespace sip {
          *               false      Ž¸”s
          */
         bool Push(const RenderCommandPtr& cmd, int layer) {
-            if (layer >= commands_.size()) {
+            if ((unsigned)layer >= commands_.size()) {
                 return false;
             }
             commands_[layer].push_back(cmd);

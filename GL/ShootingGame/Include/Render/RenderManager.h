@@ -5,6 +5,9 @@
 #include    "RenderEndCommand.h"
 #include    "../../Framework/Common/Singleton.h"
 #include    "../../FrameWorkManager.h"
+#include    "../Common/FrameBuffer.h"
+#include    "../Common/Sprite.h"
+#include    "../Common/GraphicsController.h"
 
 namespace sip {
 
@@ -29,10 +32,10 @@ namespace sip {
         std::thread                  thread_;
         /** 実行フラグ */
         bool                         run_;
-        
-        bool                         context_;
 
-        bool                         set_context_;
+        FrameBufferPtr               frameBuffer_;
+
+        SpritePtr                    frameSprite_;
 
         /**
          * @brief        コンストラクタ
@@ -44,8 +47,8 @@ namespace sip {
             , lock_()
             , thread_()
             , run_(true)
-            , set_context_(true)
-            , context_(false) {
+            , frameBuffer_(nullptr)
+            , frameSprite_(nullptr) {
             thread_ = std::thread([this] { Exec(); });
             executedTask_.reserve(ExecutedQueueCount);
         }
@@ -61,18 +64,8 @@ namespace sip {
          * @brief        描画スレッド
          */
         void Exec() {
+            glfwMakeContextCurrent(FrameWorkManagerInstance.GetWindow());
             while (run_) {
-                if (!context_) {
-                    if (set_context_) {
-                        continue;
-                    }
-                    SetContext(false);
-                    set_context_ = true;
-                }
-                else if (!set_context_) {
-                    SetContext(true);
-                    set_context_ = true;
-                }
                 //タスクを取り出し
                 RenderCommandTaskPtr task = Pop();
                 if (!task) {
@@ -82,6 +75,9 @@ namespace sip {
                 }
                 //実行
                 task->Exec();
+                if (queue_.size() >= 30) {
+                    for(int i = 0; i < 10; i++) queue_.pop();
+                }
             }
         }
 
@@ -128,29 +124,10 @@ namespace sip {
          */
         RenderCommandTaskPtr GetExecutedTask(int cnt) {
             std::lock_guard<std::mutex> guard(lock_);
-            if (executedTask_.size() <= cnt) {
+            if (executedTask_.size() <= (unsigned)cnt) {
                 return RenderCommandTaskPtr();
             }
             return *(executedTask_.rbegin() + cnt);
-        }
-
-        void SetThreadContext(bool b) {
-            set_context_ = false;
-            context_ = b;
-        }
-
-        bool IsUseContext() const {
-            return context_;
-        }
-
-        bool IsActiveContext() const {
-            return set_context_;
-        }
-
-        static void SetContext(bool b, GLFWwindow* pointer = nullptr) {
-            GLFWwindow* window = (b ? FrameWorkManagerInstance.GetWindow() : nullptr);
-            if (b && pointer) window = pointer;
-            glfwMakeContextCurrent(window);
         }
     };
 

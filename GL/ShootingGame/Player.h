@@ -1,7 +1,11 @@
 #pragma once
 #include "Character.h"
+#include "Include/Input/InputManager.h"
+
 class Player : public Character {
 private:
+
+	sip::InputPtr input_;
 
 public:
 
@@ -13,7 +17,12 @@ public:
 
 	virtual void Update() override;
 
-	virtual void Render(sip::RenderCommandTask& render_task) override;
+	virtual void Render(sip::RenderCommandTaskPtr& render_task) override;
 
+	void SetInput(const sip::InputPtr& input) {
+		input_ = input;
+	}
+
+	virtual void Damage(int d) override;
 };
 

@@ -1,8 +1,13 @@
 #pragma once
 #include "GameDefine.h"
+#include "Stage.h"
+#include "GameObject.h"
 
 class GameScene : public SceneBase<GameSceneData> {
 private:
+
+    Stage stage_;
+    std::vector<GameObjectPtr> objects_;
 
 public:
     GameScene(GameSceneData& sceneData);

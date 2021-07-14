@@ -4,6 +4,7 @@
 #include "Include/Render/RenderClearCommand.h"
 #include "Include/Render/SpriteRenderCommand.h"
 #include "Include/Common/Math.h"
+#include "Include/Resource/ResourceManager.h"
 
 #include "Include/Input/GLInput.h"
 
@@ -16,19 +17,15 @@ TitleScene::~TitleScene() {
 }
 
 void TitleScene::Initialize() {
-    sip::ContextGuard guard;
-    //画像読み込み
-    texture_ = std::make_shared<Sample::Texture>("title.png");
-
-    //描画用スプライト生成
-    sprite_ = std::make_shared<Sample::Sprite>();
-    sprite_->Create(texture_, GraphicsControllerInstance.SpriteShader());
-
+    //描画用スプライト
+    auto pack = ResourceManagerInstance.GetPack("Title");
+    sprite_ = pack->Get<Sprite>()->Get("Title");
 }
 
 void TitleScene::Update() {
     
     if (input_->IsPush("test_1")) {
+        std::cout << "Push\n";
         SceneManagerInstance.ChangeScene(SceneName::Game);
     }
 

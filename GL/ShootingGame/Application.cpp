@@ -12,7 +12,7 @@
 #include    "Include/Render/SpriteRenderCommand.h"
 #include    "Include/Render/RenderFrameBufferBindCommand.h"
 #include    "Include/Render/RenderResetTargetCommand.h"
-#include    "Include/Render/ContextGuard.h"
+#include    "Include/Resource/ResourceManager.h"
 
 #include    "TitleScene.h"
 #include    "GameScene.h"
@@ -44,6 +44,7 @@ Application::~Application() {
  * @brief        初期化
  */
 void Application::Initialize() {
+    glfwMakeContextCurrent(window_);
 
     //リソースディレクトリを素材配置先に指定
     ::SetCurrentDirectory(L"Resources");
@@ -54,22 +55,33 @@ void Application::Initialize() {
 
     //カメラ設定
     camera = std::make_shared<Camera>();
-    camera->Create2D(1024, 768);
+    camera->Create2D(width_, height_);
     GraphicsController::GetInstance().Camera(camera);
 
     //音読み込み
     sound = std::make_shared<Sound>("se_enter.wav");
 
     auto sceneData = SceneManagerInstance.GetSceneData();
-    auto input = InputManagerInstance.AddInput<sip::LogInput>()->CreateInput<sip::GLInput>(input_);
-    input->AddKeyboardKey("test_1", GLFW_KEY_1);
-    sceneData->input_ = input;
+    auto debug_input0 = InputManagerInstance.AddInput<sip::LogInput>()->CreateInput<sip::GLInput>(input_);
+    debug_input0->AddKeyboardKey("test_1", GLFW_KEY_1);
+    sceneData->input_ = debug_input0;
+    auto player_input1 = InputManagerInstance.AddInput<sip::LogInput>()->CreateInput<sip::GLInput>(input_);
+    player_input1->AddKeyboardKey("Horizontal", GLFW_KEY_RIGHT, GLFW_KEY_LEFT);
+    player_input1->AddKeyboardKey("Vertical"  , GLFW_KEY_DOWN , GLFW_KEY_UP  );
+
+    //画像読み込み
+    ResourceManagerInstance.LoadPack("Title", "TitleResources.json");
+    ResourceManagerInstance.LoadPack("Stage1", "Stage1Resources.json");
+    ResourceManagerInstance.LoadPack("Player1", "Player1Resources.json");
 
     //Scene
+    SceneManagerInstance.FrameBufferCreate();
     SceneManagerInstance.Add<TitleScene>(SceneName::Title);
     SceneManagerInstance.Add<GameScene>(SceneName::Game);
     SceneManagerInstance.Initialize(SceneName::Title, 120);
     SceneManagerInstance.FadeColor(sip::Vector4(1.0f, 0.0f, 1.0f, 1.0f));
+
+    glfwMakeContextCurrent(nullptr);
 }
 
 /**

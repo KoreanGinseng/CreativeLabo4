@@ -2,6 +2,7 @@
 
 #include    "../Math/Rectangle.h"
 #include    "../Math/Vector4.h"
+#include    "../Math/Vector3.h"
 #include    "Texture.h"
 #include	"Sampler.h"
 #include    "Buffer.h"

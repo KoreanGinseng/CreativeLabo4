@@ -1,6 +1,6 @@
 #pragma once
 #include "RenderManager.h"
-
+/*
 namespace sip {
     class ContextGuard {
     private:
@@ -32,3 +32,4 @@ namespace sip {
         }
     };
 }
+*/

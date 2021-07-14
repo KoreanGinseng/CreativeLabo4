@@ -25,7 +25,7 @@ public:
 
     virtual void Update() = 0;
     
-    virtual void Render(sip::RenderCommandTask& render_task) = 0;
+    virtual void Render(sip::RenderCommandTaskPtr& render_task) = 0;
 
     virtual void PosX(const float x) { posX_ = x; }
 

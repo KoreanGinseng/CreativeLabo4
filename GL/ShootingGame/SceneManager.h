@@ -27,6 +27,9 @@ private:
     ScenePtr<SceneData> currentScene_;
     ScenePtr<SceneData> nextScene_;
 
+    FrameBufferPtr      frameBuffer_;
+    SpritePtr           frameSprite_;
+
     Key                 current_;
     Key                 next_;
 
@@ -60,6 +63,26 @@ public:
         transition_ = Transition::FadeOut;
     }
 
+    void FrameBufferCreate() {
+        if (!frameBuffer_) {
+            frameBuffer_ = std::make_shared<FrameBuffer>();
+            frameBuffer_->Create(GraphicsControllerInstance.ScreenWidth(),
+                GraphicsControllerInstance.ScreenHeight());
+        }
+        if (!frameSprite_) {
+            frameSprite_ = frameBuffer_->CreateSprite(GraphicsControllerInstance.SpriteShader());
+        }
+    }
+
+
+    FrameBufferPtr GetFrameBuffer(void) const {
+        return frameBuffer_;
+    }
+
+    SpritePtr GetFrameSprite(void) const {
+        return frameSprite_;
+    }
+
     void FadeColor(const sip::Vector4& color) {
         fadeColor_ = color;
     }
@@ -91,7 +114,7 @@ public:
                 timer_ = -1;
                 transition_ = Transition::Active;
             }
-        } break;
+        } return;
         case Transition::FadeOut:
         {
             timer_++;
@@ -101,7 +124,7 @@ public:
                 currentScene_ = nextScene_;
                 nextScene_    = nullptr;
             }
-        } break;
+        } return;
         case Transition::Active:
         {
         } break;
@@ -110,10 +133,8 @@ public:
     }
 
     void Render(sip::RenderCommandTaskPtr& render_task) {
-        auto  buffer = currentScene_->GetFrameBuffer();
-        auto  sprite = currentScene_->GetFrameSprite();
         float alpha  = 1.0f;
-        render_task->Push(sip::GLRenderFrameBufferBindCommand::Create(buffer), 0);
+        render_task->Push(sip::GLRenderFrameBufferBindCommand::Create(frameBuffer_), 0);
         switch (transition_) {
         case Transition::FadeIn:
         {
@@ -130,7 +151,7 @@ public:
         currentScene_->Render(render_task);
         render_task->Push(sip::RenderResetTargetCommand::Create(), 0);
         render_task->Push(sip::RenderClearCommand::Create(fadeColor_.r, fadeColor_.g, fadeColor_.b, 1, 0, 0), 0);
-        render_task->Push(sip::SpriteRenderCommand::Create(sprite, alpha), 0);
+        render_task->Push(sip::SpriteRenderCommand::Create(frameSprite_, alpha), 0);
     }
 
     const SceneData& GetSceneData(void) const {

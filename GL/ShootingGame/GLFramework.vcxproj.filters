@@ -162,6 +162,9 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Timer\IFrameTimer.h">
@@ -326,7 +329,7 @@
     <ClInclude Include="Include\Resource\JsonResourcePackCreator.h">
       <Filter>Include\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Resource\JsonTextureResourceCreator.h">
+    <ClInclude Include="Include\Resource\JsonSpriteResourceCreator.h">
       <Filter>Include\Resource</Filter>
     </ClInclude>
     <ClInclude Include="Include\Resource\ResourceContainer.h">
@@ -394,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="Include\Render\ContextGuard.h">
       <Filter>Include\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
