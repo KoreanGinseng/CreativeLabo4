@@ -2,10 +2,10 @@
 #include "Include/Resource/ResourceManager.h"
 #include "Include/Render/SpriteRenderCommand.h"
 #include "BulletManager.h"
-#include "GoStraightBullet.h"
+#include "StraightMoveAction.h"
 
-Player::Player() 
-    : Character() {
+Player::Player(MoveActionPtr action)
+    : Character(action) {
 }
 
 Player::~Player() {
@@ -19,24 +19,20 @@ void Player::Initialize() {
 }
 
 void Player::Update() {
-    if (auto axis = input_->GetAxis("Horizontal")) {
-        posX_ += axis;
-    }
-    if (auto axis = input_->GetAxis("Vertical")) {
-        posY_ += axis;
-    }
+    Move();
     if (input_->IsPress("Fire")) {
-        auto bullet = std::make_shared<GoStraightBullet>(0.0f, 10.0f);
+        auto bullet = std::make_shared<Bullet>(0.0f);
+        bullet->SetMove(std::make_shared<StraightMoveAction>(bullet->Transform())->SetSpeed(10.0f, 3.14f));
         bullet->Initialize();
         float bw = bullet->Sprite()->Texture()->Width();
         float pw = sprite_->Texture()->Width();
-        bullet->Fire(posX_ + ((pw - bw) * 0.5f), posY_);
+        bullet->Fire(transform_->GetPositionX() + ((pw - bw) * 0.5f), transform_->GetPositionY());
         BulletManagerInstance.Add(bullet);
     }
 }
 
 void Player::Render(sip::RenderCommandTaskPtr& render_task) {
-    render_task->Push(sip::SpriteRenderCommand::Create(sprite_, sip::Vector3(posX_, posY_, 0.0f)), 0);
+    render_task->Push(sip::SpriteRenderCommand::Create(sprite_, sip::Vector3(transform_->GetPositionX(), transform_->GetPositionY(), 0.0f)), 0);
 }
 
 void Player::Damage(int d) {

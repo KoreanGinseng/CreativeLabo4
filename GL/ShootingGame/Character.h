@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Include/Common/Sprite.h"
+#include "MoveAction.h"
 
 class Character : public GameObject {
 protected:
@@ -9,12 +10,15 @@ protected:
 
 	SpritePtr sprite_;
 
+	MoveActionPtr move_;
+
 public:
 
-	Character()
+	explicit Character(MoveActionPtr action)
 		: GameObject()
 		, hp_(1)
-		, sprite_() {
+		, sprite_()
+	    , move_(action) {
 	}
 
 	virtual ~Character() override {
@@ -30,9 +34,15 @@ public:
 		}
 	}
 
+	void Move() {
+		if (move_) move_->Exec();
+	}
+
 	int HP() const { return hp_; }
 
-	virtual Circle GetCircle() const noexcept override { return Circle(posX_ + sprite_->Texture()->Width() * 0.5f, posY_ + sprite_->Texture()->Height() * 0.5f, radius_); }
+	void SetMove(MoveActionPtr move) { move_ = move; }
+
+	virtual Circle GetCircle() const noexcept override { return Circle(transform_->GetPositionX() + sprite_->Texture()->Width() * 0.5f, transform_->GetPositionY() + sprite_->Texture()->Height() * 0.5f, radius_); }
 
 };
 

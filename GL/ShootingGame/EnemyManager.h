@@ -24,6 +24,8 @@ public:
 
     EnemyArray& GetEnemyArray() { return enemies_; }
 
+    void Reset() { enemies_.clear(); }
+
 };
 
 #define EnemyManagerInstance EnemyManager::GetInstance()

@@ -16,6 +16,8 @@
 
 #include    "TitleScene.h"
 #include    "GameScene.h"
+#include    "GameOverScene.h"
+#include    "GameClearScene.h"
 
 using namespace Sample;
 
@@ -64,6 +66,7 @@ void Application::Initialize() {
     auto sceneData = SceneManagerInstance.GetSceneData();
     auto debug_input0 = InputManagerInstance.AddInput<sip::LogInput>()->CreateInput<sip::GLInput>(input_);
     debug_input0->AddKeyboardKey("test_1", GLFW_KEY_1);
+    debug_input0->AddKeyboardKey("Enter", GLFW_KEY_ENTER);
     sceneData->input_ = debug_input0;
     auto player_input1 = InputManagerInstance.AddInput<sip::LogInput>()->CreateInput<sip::GLInput>(input_);
     player_input1->AddKeyboardKey("Horizontal", GLFW_KEY_RIGHT, GLFW_KEY_LEFT);
@@ -72,6 +75,8 @@ void Application::Initialize() {
 
     //画像読み込み
     ResourceManagerInstance.LoadPack("Title", "TitleResources.json");
+    ResourceManagerInstance.LoadPack("GameOver", "GameOverResources.json");
+    ResourceManagerInstance.LoadPack("GameClear", "GameClearResources.json");
     ResourceManagerInstance.LoadPack("Stage1", "Stage1Resources.json");
     ResourceManagerInstance.LoadPack("Player1", "Player1Resources.json");
     ResourceManagerInstance.LoadPack("Enemies", "EnemyResources.json");
@@ -80,9 +85,11 @@ void Application::Initialize() {
     //Scene
     SceneManagerInstance.FrameBufferCreate();
     SceneManagerInstance.Add<TitleScene>(SceneName::Title);
+    SceneManagerInstance.Add<GameClearScene>(SceneName::GameClear);
+    SceneManagerInstance.Add<GameOverScene>(SceneName::GameOver);
     SceneManagerInstance.Add<GameScene>(SceneName::Game);
     SceneManagerInstance.Initialize(SceneName::Title, 120);
-    SceneManagerInstance.FadeColor(sip::Vector4(1.0f, 0.0f, 1.0f, 1.0f));
+    SceneManagerInstance.FadeColor(sip::Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 
     glfwMakeContextCurrent(nullptr);
 }
@@ -95,7 +102,7 @@ void Application::Update() {
     //アプリの更新処理を記述
     InputManagerInstance.Update();
 
-    if (input_->GetKeyState(GLFW_KEY_ENTER)) {
+    if (InputManagerInstance.GetInput(0)->IsPush("Enter")) {
         sound->Play();
     }
 

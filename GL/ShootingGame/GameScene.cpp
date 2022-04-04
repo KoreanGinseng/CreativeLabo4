@@ -3,10 +3,18 @@
 #include "Include/Input/InputManager.h"
 #include "BulletManager.h"
 #include "EnemyManager.h"
-#include "GoStraightEnemy.h"
+#include "PlayerMoveAction.h"
+#include "Random.h"
+#include "StraightMoveAction.h"
+#include "CollisionManager.h"
+#include "GameManager.h"
 
 GameScene::GameScene(GameSceneData& sceneData)
-    : SceneBase(sceneData) {
+    : SceneBase(sceneData)
+    , player_(nullptr) {
+    GameManagerInstance.Reset();
+    EnemyManagerInstance.Reset();
+    BulletManagerInstance.Reset();
 }
 
 GameScene::~GameScene() {
@@ -14,23 +22,40 @@ GameScene::~GameScene() {
 
 void GameScene::Initialize() {
     stage_.Initialize(0);
-    auto player = std::make_shared<Player>();
+    auto playerMove = MoveAction::Create<PlayerMoveAction>(player_.Transform())->SetInput(InputManagerInstance.GetInput(1));
+    player_.SetMove(playerMove);
     player_.SetInput(InputManagerInstance.GetInput(1));
     player_.Initialize();
+    player_.Transform()->SetPosition(50, 300);
 }
 
 void GameScene::Update() {
+    if (GameManagerInstance.EnemyDeadCount() >= 10) {
+        GameManagerInstance.IsGameClear(true);
+    }
+    if (player_.HP() <= 0) {
+        GameManagerInstance.IsGameOver(true);
+    }
+    if (GameManagerInstance.IsGameClear()) {
+        SceneManagerInstance.ChangeScene(SceneName::GameClear);
+    }
+    if (GameManagerInstance.IsGameOver()) {
+        SceneManagerInstance.ChangeScene(SceneName::GameOver);
+    }
+
     if (sceneData_.input_->IsPush("test_1")) {
-        std::cout << "Push2\n";
         SceneManagerInstance.ChangeScene(SceneName::Title);
     }
+
     stage_.Update();
     player_.Update();
 
-    if (stage_.Scroll() % 120 == 0) {
-        auto enemy = std::make_shared<GoStraightEnemy>(0.0f, 1.0f);
+    if (stage_.Scroll() % 180 == 0) {
+        auto enemy = std::make_shared<Enemy>(RandomUtilities::GetInstance().Random(1, 15), nullptr);
+        enemy->SetMove(std::make_shared<StraightMoveAction>(enemy->Transform())->SetSpeed(1.0f, 0));
         enemy->Initialize();
-        enemy->Start(100.0f, 0.0f);
+        float x = RandomUtilities::GetInstance().Random(3200) * 0.01f;
+        enemy->Start(x, 0.0f);
         EnemyManagerInstance.Add(enemy);
     }
 
@@ -41,20 +66,10 @@ void GameScene::Update() {
     auto& enemies = EnemyManagerInstance.GetEnemyArray();
     auto& bullets = BulletManagerInstance.GetBulletArray();
 
-    for (auto& enemy : enemies) {
-        for (auto& bullet : bullets) {
-            if (enemy->GetCircle().CollisionCircle(bullet->GetCircle())) {
-                if (bullet->IsEnd()) {
-                    continue;
-                }
-                enemy->Damage(1);
-                if (enemy->HP() <= 0) {
-                    enemy->IsEnd(true);
-                }
-                bullet->IsEnd(true);
-            }
-        }
-    }
+    CollisionManagerInstance.CollisionEnemyAndBullet(enemies, bullets);
+    CollisionManagerInstance.CollisionPlayerAndBullet(player_, bullets);
+    CollisionManagerInstance.CollisionPlayerAndEnemy(player_, enemies);
+
 
     EnemyManagerInstance.Refresh();
 

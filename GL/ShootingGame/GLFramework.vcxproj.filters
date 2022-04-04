@@ -121,6 +121,18 @@
     <Filter Include="ヘッダー ファイル\Stage">
       <UniqueIdentifier>{1440b8e6-9096-4a5d-9e7d-8985a6391627}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Manager">
+      <UniqueIdentifier>{154f4505-7052-4376-ba2b-b173f257fe98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Manager">
+      <UniqueIdentifier>{ebe5f99d-f103-47a2-a665-e6e57a121951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Move">
+      <UniqueIdentifier>{27d31a75-2dac-4a57-b693-4ebe0df9fc50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Move">
+      <UniqueIdentifier>{df893364-0f10-46a4-a7e5-ab4937655b52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -189,9 +201,6 @@
     <ClCompile Include="BulletManager.cpp">
       <Filter>ソース ファイル\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="GoStraightBullet.cpp">
-      <Filter>ソース ファイル\Bullet</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
@@ -207,14 +216,29 @@
     <ClCompile Include="Stage.cpp">
       <Filter>ソース ファイル\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="GoStraightEnemy.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Circle.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMoveAction.cpp">
+      <Filter>ソース ファイル\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="StraightMoveAction.cpp">
+      <Filter>ソース ファイル\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClearScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -350,9 +374,6 @@
     <ClInclude Include="Include\Render\GLRenderEndCommand.h">
       <Filter>Include\Render</Filter>
     </ClInclude>
-    <ClInclude Include="FrameWorkManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Render\GLRenderStartCommand.h">
       <Filter>Include\Render</Filter>
     </ClInclude>
@@ -449,9 +470,6 @@
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\Player</Filter>
     </ClInclude>
-    <ClInclude Include="GoStraightBullet.h">
-      <Filter>ヘッダー ファイル\Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="GameScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
@@ -467,14 +485,38 @@
     <ClInclude Include="Stage.h">
       <Filter>ヘッダー ファイル\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="GoStraightEnemy.h">
-      <Filter>ヘッダー ファイル\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Circle.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>ヘッダー ファイル\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWorkManager.h">
+      <Filter>ヘッダー ファイル\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveAction.h">
+      <Filter>ヘッダー ファイル\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMoveAction.h">
+      <Filter>ヘッダー ファイル\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="StraightMoveAction.h">
+      <Filter>ヘッダー ファイル\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>ヘッダー ファイル\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClearScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

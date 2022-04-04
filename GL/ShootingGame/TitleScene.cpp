@@ -1,6 +1,5 @@
 #include "TitleScene.h"
 #include "Include/Render/RenderManager.h"
-#include "Include/Render/ContextGuard.h"
 #include "Include/Render/RenderClearCommand.h"
 #include "Include/Render/SpriteRenderCommand.h"
 #include "Include/Common/Math.h"
@@ -24,8 +23,7 @@ void TitleScene::Initialize() {
 
 void TitleScene::Update() {
     
-    if (input_->IsPush("test_1")) {
-        std::cout << "Push\n";
+    if (input_->IsPush("Enter")) {
         SceneManagerInstance.ChangeScene(SceneName::Game);
     }
 

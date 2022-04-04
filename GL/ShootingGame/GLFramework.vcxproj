@@ -149,6 +149,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Framework\Framework\Framework.cpp" />
@@ -159,9 +160,9 @@
     <ClCompile Include="Framework\Sound\Audio.cpp" />
     <ClCompile Include="Framework\Sound\Sound.cpp" />
     <ClCompile Include="Framework\Sound\WaveFile.cpp" />
+    <ClCompile Include="GameClearScene.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="GoStraightBullet.cpp" />
-    <ClCompile Include="GoStraightEnemy.cpp" />
     <ClCompile Include="Include\Input\GLInput.cpp" />
     <ClCompile Include="Include\Input\Input.cpp" />
     <ClCompile Include="Include\Input\MofInput.cpp" />
@@ -174,8 +175,11 @@
     <ClCompile Include="Include\Render\GLSpriteRenderCommand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerMoveAction.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="StraightMoveAction.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -183,6 +187,7 @@
     <ClInclude Include="BulletManager.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="FrameWorkManager.h" />
@@ -213,11 +218,12 @@
     <ClInclude Include="Framework\Timer\GLFrameTimer.h" />
     <ClInclude Include="Framework\Timer\WinFrameTimer.h" />
     <ClInclude Include="Framework\Timer\IFrameTimer.h" />
+    <ClInclude Include="GameClearScene.h" />
     <ClInclude Include="GameDefine.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GameScene.h" />
-    <ClInclude Include="GoStraightBullet.h" />
-    <ClInclude Include="GoStraightEnemy.h" />
     <ClInclude Include="Include\Common\GraphicsController.h" />
     <ClInclude Include="Include\Common\Math.h" />
     <ClInclude Include="Include\Common\Rectangle.h" />
@@ -257,12 +263,16 @@
     <ClInclude Include="Include\Resource\ResourceManager.h" />
     <ClInclude Include="Include\Resource\ResourcePack.h" />
     <ClInclude Include="Include\Resource\Texture.h" />
+    <ClInclude Include="MoveAction.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerMoveAction.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="StraightMoveAction.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

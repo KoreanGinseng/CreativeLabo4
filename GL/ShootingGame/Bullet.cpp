@@ -2,12 +2,13 @@
 #include "Include/Render/SpriteRenderCommand.h"
 #include "Include/Resource/ResourceManager.h"
 
-Bullet::Bullet(int type) 
-    : Character()
+Bullet::Bullet(int type)
+    : Character(nullptr)
     , type_(type)
     , isEnemy_(false)
     , isEnd_(false)
-    , move_() {
+    , move_()
+    , targetPositions_() {
 }
 
 Bullet::~Bullet() {
@@ -20,6 +21,14 @@ void Bullet::Initialize() {
     radius_ = sprite_->Texture()->Width() * 0.25f * 0.5f;
 }
 
+void Bullet::Fire(float x, float y) {
+    transform_->SetPosition(x, y);
+}
+
+void Bullet::Update() {
+    Character::Move();
+}
+
 void Bullet::Render(sip::RenderCommandTaskPtr& render_task) {
-    render_task->Push(sip::SpriteRenderCommand::Create(sprite_, sip::Vector3(posX_, posY_, 0.0f)), 0);
+    render_task->Push(sip::SpriteRenderCommand::Create(sprite_, sip::Vector3(transform_->GetPositionX(), transform_->GetPositionY(), 0.0f)), 0);
 }

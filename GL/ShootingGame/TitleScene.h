@@ -5,7 +5,6 @@
 class TitleScene : public SceneBase<GameSceneData> {
 private:
 
-    Sample::TexturePtr texture_;
     SpritePtr          sprite_;
     sip::InputPtr      input_;
 

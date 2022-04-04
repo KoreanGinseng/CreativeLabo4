@@ -9,7 +9,7 @@ private:
 
 public:
 
-	Player();
+	explicit Player(MoveActionPtr action);
 
 	virtual ~Player() override;
 

@@ -2,21 +2,19 @@
 #include "Framework/Common/Common.h"
 #include "Include/Render/RenderManager.h"
 #include "Circle.h"
+#include "Transform.h"
 
 class __declspec(novtable) GameObject {
 protected:
 
-    float posX_;
-    
-    float posY_;
+    TransformPtr transform_;
 
     float radius_;
 
 public:
 
     GameObject()
-        : posX_(0.0f)
-        , posY_(0.0f)
+        : transform_(Transform::Create())
         , radius_(0.0f) {
     }
 
@@ -28,19 +26,13 @@ public:
     
     virtual void Render(sip::RenderCommandTaskPtr& render_task) = 0;
 
-    virtual void PosX(const float x) { posX_ = x; }
-
-    virtual void PosY(const float y) { posY_ = y; }
+    virtual TransformPtr Transform() { return transform_; }
     
     virtual void Radius(const float r) { radius_ = r; }
 
-    virtual float PosX() const noexcept { return posX_; }
-
-    virtual float PosY() const noexcept { return posY_; }
-
     virtual float Radius() const noexcept { return radius_; }
 
-    virtual Circle GetCircle() const noexcept { return Circle(posX_, posY_, radius_); }
+    virtual Circle GetCircle() const noexcept { return Circle(transform_->GetPositionX(), transform_->GetPositionY(), radius_); }
 };
 
 using GameObjectPtr = std::shared_ptr<GameObject>;

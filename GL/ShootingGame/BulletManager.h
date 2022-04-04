@@ -22,6 +22,8 @@ public:
     void Render(sip::RenderCommandTaskPtr& render_task);
 
     BulletArray& GetBulletArray() { return bullets_; }
+
+    void Reset() { bullets_.clear(); }
 };
 
 #define BulletManagerInstance BulletManager::GetInstance()

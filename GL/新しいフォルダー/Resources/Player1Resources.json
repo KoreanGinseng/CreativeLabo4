@@ -1,0 +1,16 @@
+{
+  "Sprites": [
+    {
+      "Key": "Player1_1",
+      "File": "Plane/Plane1Up.png"
+    },
+    {
+      "Key": "Player1_2",
+      "File": "Plane/Plane2Up.png"
+    },
+    {
+      "Key": "Player1_3",
+      "File": "Plane/Plane3Up.png"
+    }
+  ]
+}

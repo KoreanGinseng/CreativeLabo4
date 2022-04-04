@@ -14,10 +14,10 @@ void BulletManager::Add(const BulletPtr& bullet) {
 void BulletManager::Update() {
     for (auto& bullet : bullets_) {
         bullet->Update();
-        bool isHorizoutal = (bullet->PosX() + bullet->Sprite()->Texture()->Width()) < 0 ||
-            bullet->PosX() > FrameWorkManagerInstance.GetWindowWidth();
-        bool isVertical = (bullet->PosY() + bullet->Sprite()->Texture()->Height()) < 0 ||
-            bullet->PosY() > FrameWorkManagerInstance.GetWindowHeight();
+        bool isHorizoutal = (bullet->Transform()->GetPositionX() + bullet->Sprite()->Texture()->Width()) < 0 ||
+            bullet->Transform()->GetPositionX() > FrameWorkManagerInstance.GetWindowWidth();
+        bool isVertical = (bullet->Transform()->GetPositionY() + bullet->Sprite()->Texture()->Height()) < 0 ||
+            bullet->Transform()->GetPositionY() > FrameWorkManagerInstance.GetWindowHeight();
         if (isHorizoutal || isVertical) {
             bullet->IsEnd(true);
         }
